@@ -1,5 +1,6 @@
-# Django is needed to run Django
-Django
-
-# gunicorn is needed by Heroku to launch the web server
-gunicorn
+asgiref==3.6.0
+dj-database-url==1.2.0
+Django==4.1.6
+gunicorn==20.1.0
+sqlparse==0.4.3
+tzdata==2022.7
