@@ -1,6 +1,6 @@
 # Django Practice Assessment
 
-__Name:__
+__Name:__ Philip Yao
 
-__Computing ID:__
+__Computing ID:__ hae6ds
 
