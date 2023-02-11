@@ -1,6 +1,5 @@
-# Django Practice Assessment
+# Tutor Me Project
 
-__Name:__
+__Students are often looking for tutors for courses. This app will help facilitate this matching.__
 
-__Computing ID:__
 
