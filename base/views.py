@@ -3,4 +3,4 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 def index(request):
-    return HttpResponseRedirect(request, 'index/')
+    return render(request, 'base/index.html')
