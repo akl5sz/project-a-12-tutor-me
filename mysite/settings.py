@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'django.contrib.sites',
+    # 'django.contrib.sites',
     'oauth_app',
     'allauth',
     'allauth.account',
@@ -129,10 +129,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SITE_ID = 3
-# SOCIALACCOUNT_QUERY_EMAIL = True
-# ACCOUNT_LOGOUT_ON_GET = True
-# ACCOUNT_UNIQUE_EMAIL = True
-# ACCOUNT_EMAIL_REQUIRED = True
 
 
 
