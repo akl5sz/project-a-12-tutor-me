@@ -16,12 +16,14 @@ def loginPage(request):
         request.user.groups.add(group)
         group = Group.objects.get(name='tutor')
         request.user.groups.remove(group)
+        return render(request, 'base/student.html')
 
     if(request.GET.get('tutor')):
         group = Group.objects.get(name='tutor')
         request.user.groups.add(group)
         group = Group.objects.get(name='student')
         request.user.groups.remove(group)
+        return render(request, 'base/tutor.html')
 
     return render(request, 'base/login.html')
 
