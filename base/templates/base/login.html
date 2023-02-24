@@ -1,5 +1,6 @@
 {% block nav %}{% include 'base/navbar.html' %}{% endblock nav %}
 
+<h1>Login Page</h1>
 {% load socialaccount %}
 {% if user.is_authenticated %}
   <p>You are logged in as {{ user.username }}</p>
