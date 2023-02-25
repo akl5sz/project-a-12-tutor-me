@@ -1,17 +1,30 @@
 {% block nav %}{% include 'base/navbar.html' %}{% endblock nav %}
 
-<h1>Login Page</h1>
+<div class="d-flex flex-column align-items-center">
+  <div style="height: 10px;"></div>
+  <h1>Login Page</h1>
+  <div style="height: 10px;"></div>
+</div>
+
 {% load socialaccount %}
 {% if user.is_authenticated %}
-  <p>You are logged in as {{ user.username }}</p>
-
-  <form action="#" method="get">
-      <input type="submit" class="btn" value="student" name="student">
-      <input type="submit" class="btn" value="tutor" name="tutor">
-  </form>
-
-  <a href="/logout">Logout</a>
+  <body>
+    <div class="d-flex flex-column align-items-center">
+      <p>You are currently logged in as {{ user.username }}</p>
+      <p>Select Your Role:</p>
+      <form action="#" method="get">
+        <input class="btn btn-primary" type="submit" class="btn" value="student" name="student">
+        <input class="btn btn-primary" type="submit" class="btn" value="tutor" name="tutor">
+      </form>
+      <a href="/logout">Logout</a>
+    </div>
+  </body>
+  
 {% else %}
-  <a href="{% provider_login_url 'google' %}">Login With Google</a>
+  <body>
+    <div class="d-flex flex-column align-items-center">
+      <a href="{% provider_login_url 'google' %}">Login With Google</a>
+    </div>
+  </body>
 {% endif %}
 
