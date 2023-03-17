@@ -31,6 +31,11 @@ def loginPage(request):
 def studentPage(request):
     return render(request, 'base/student.html')
 
+
 @allowed_users(allowed_roles=['tutor'])
 def tutorPage(request):
     return render(request, 'base/tutor.html')
+
+
+def coursePage(request):
+    return render(request, 'base/courses.html')
