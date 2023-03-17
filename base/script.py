@@ -13,8 +13,6 @@ def url(*flagList):
         classList.append((c['descr']))
     return classList
 
-
-
 def main():
     flagList = [("term", 1228)]
     url(flagList)
