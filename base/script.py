@@ -14,7 +14,6 @@ def url(flagList):
     return classList
 
 def main():
-    print("test")
     flagList = [("term", 1228), ("subject", "CS")]
     list = url(flagList)
     for item in list:
