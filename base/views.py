@@ -41,5 +41,6 @@ def tutorPage(request):
 def coursePage(request):
     # url = "https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula." \
     #       "IScript_ClassSearch?institution=UVA01&page=1"
-    response = base.script.url([('page', 1)])
+    #response = base.script.url([('term', '1228')])
+    response = base.script.url([('page', 4)])
     return render(request, 'base/courses.html', {'response' : response})
