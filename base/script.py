@@ -19,6 +19,6 @@ def main():
     for item in list:
         print(item)
 
-main()
+# main()
 
 

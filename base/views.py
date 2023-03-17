@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from .decorators import allowed_users
+import base.script
 
 def index(request):
     return render(request, 'base/index.html')
@@ -38,4 +39,7 @@ def tutorPage(request):
 
 
 def coursePage(request):
-    return render(request, 'base/courses.html')
+    # url = "https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula." \
+    #       "IScript_ClassSearch?institution=UVA01&page=1"
+    response = base.script.url([('page', 1)])
+    return render(request, 'base/courses.html', {'response' : response})
