@@ -5,4 +5,4 @@ from django import forms
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('name', 'classes')
+        fields = ('hourly_rate', 'time_frames',)

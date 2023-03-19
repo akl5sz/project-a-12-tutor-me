@@ -1,10 +1,15 @@
+from django.conf import settings
 from django.db import models
 
 # Create your models here.
 
 class Profile(models.Model):
-    name = models.CharField(max_length=30)
-    classes = models.TextField(max_length=200)
+    name = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+        )
+    hourly_rate = models.CharField(max_length=40)
+    time_frames = models.CharField(max_length=40)
 
     def __str__(self):
         return '{} - {}'.format(self.user, self.classes)
