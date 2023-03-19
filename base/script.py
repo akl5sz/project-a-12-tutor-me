@@ -17,13 +17,21 @@ def url(flagList):
         courseTitle = c['descr']
         courseName = courseMnemonic + " " + courseNumber + ": " + courseTitle
         if courseName not in classList:
+
+            # c = Course(mnem = courseMnemonic, num = courseNumber, descr = courseTitle)
+            # c.save()
             classList.append(courseName)
     return classList
 
 def main():
-    flagList = [("term", 1228), ("subject", "CS")]
-    list = url(flagList)
+
+    # i = 2
+    # for i in range(90):
+    #     flagList = [("term", 1228), ("page", str(i))]
+    #     list = url(flagList)
+
+    
     for item in list:
         print(item)
     
-
+# main()
