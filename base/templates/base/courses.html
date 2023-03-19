@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% block nav %}{% include 'base/navbar.html' %}{% endblock nav %}
 
-</body>
-</html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'base/style.css' %}">
+
+<div class="d-flex flex-column align-items-center">
+    <div style="height: 10px;"></div>
+    <h1>Course Index</h1>
+    {% for i in response %}
+        <strong>{{i}} </strong>
+    {% endfor %}
+    <div style="height: 10px;"></div>
+</div>
