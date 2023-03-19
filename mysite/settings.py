@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-m7!_eqq0(un#_okraqp-&_v18cksn!-4$u9$00ierv_c)fp2va
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','project-a-12-cs3240.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -152,6 +152,7 @@ SITE_ID = 3
 LOGIN_REDIRECT_URL = '/login'
 LOGOUT_REDIRECT_URL = '/login'
 
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

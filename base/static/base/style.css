@@ -1,8 +1,13 @@
 body {
-    background: #CAD5CA; 
-    /* background: white url("images/background.png") no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover; */
+  background-color: lightblue;
+}
+
+.d-flex flex-column align-items-center {
+  color: teal;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
 }
