@@ -1,13 +1,11 @@
 body {
-  background-color: lightblue;
+    background: white url("images/background.png") no-repeat;
+  background-size: cover;
 }
 
-.d-flex flex-column align-items-center {
-  color: teal;
+.TutoringApp {
+  color: #F8F0FB;
   text-align: center;
-}
-
-p {
-  font-family: verdana;
-  font-size: 20px;
+  font-size: 10000px;
+  font-style: italic;
 }
