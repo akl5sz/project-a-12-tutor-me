@@ -7,4 +7,16 @@
     <div style="height: 10px;"></div>
     <h1>Tutor Page</h1>
     <div style="height: 10px;"></div>
+
+    <div class="d-flex flex-column align-items-center">
+        <table>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_table }}
+        </form>
+        </table>
+        <div style="height: 10px;"></div>
+        
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
 </div>

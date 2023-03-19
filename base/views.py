@@ -4,6 +4,9 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from.models import Profile
+from .forms import ProfileForm
+
 from .decorators import allowed_users
 import base.script
 
@@ -25,7 +28,7 @@ def loginPage(request):
         group = Group.objects.get(name='student')
         request.user.groups.remove(group)
         return render(request, 'base/tutor.html')
-
+    
     return render(request, 'base/login.html')
 
 @allowed_users(allowed_roles=['student'])
@@ -35,7 +38,14 @@ def studentPage(request):
 
 @allowed_users(allowed_roles=['tutor'])
 def tutorPage(request):
-    return render(request, 'base/tutor.html')
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('base/tutor.html')
+        
+    form = ProfileForm()
+    return render(request, 'base/tutor.html', {'form': form})
 
 
 def coursePage(request):
