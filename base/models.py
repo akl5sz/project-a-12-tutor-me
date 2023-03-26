@@ -20,3 +20,4 @@ class Course(models.Model):
     descr = models.CharField(max_length=200) #Example: 'Linear Algebra'
     def __str__(self):
         return self.mnem + " " + self.num + " " + self.descr
+

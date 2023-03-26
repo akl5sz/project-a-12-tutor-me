@@ -1,11 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&family=Roboto+Mono:ital,wght@1,300&display=swap');
 body {
     background: white url("images/background.png") no-repeat;
-  background-size: cover;
+    background-size: cover;
+    margin: 0px;
 }
 
-.TutoringApp {
-  color: #F8F0FB;
-  text-align: center;
-  font-size: 10000px;
-  font-style: italic;
+.TutoringApp{
+    font-family: 'Edu NSW ACT Foundation', cursive;
+    /*or font-family: 'Roboto Mono', monospace;*/
+    font-weight: 500;
+    font-size: 16px;
+    color: #edf0f1;
+    text-decoration: none;
+}
+.navBar {
+    box-sizing: border-box;
+    margin: 0;
+    height: 75px;
+    background-color: #24252A;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+}
+
+li, a, button {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 500;
+    font-size: 16px;
+    color: #edf0f1;
+    text-decoration: none;
+}
+
+.nav__links {
+    list-style: none;
+}
+
+.nav__links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav__links li a {
+    transition: all 0.3s ease 0s;
+}
+.nav__links li a:hover {
+    color: #0088a9;
+}
+
+button {
+    padding: 9px 25px;
+    background-color: rgba(0, 136, 169, 1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+button:hover {
+    background-color: rgba(0, 136, 169, 0.8);
 }
