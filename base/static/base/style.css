@@ -64,7 +64,7 @@ button:hover {
     background-color: rgba(0, 136, 169, 0.8);
 }
 
-.coursesTitle, .loginPageTitle, .GoogleButton {
+.coursesTitle, .loginPageTitle {
     align-items: center;
     color: #edf0f1;
     width: 500px;
@@ -83,19 +83,29 @@ button:hover {
     padding: 10px;
 }
 
-.courseBox, .loginBox, .GoogleButton {
+.courseBox, .loginBox {
     padding: 100px;
     align-self: center;
 }
 
 .inputText {
-    margin: auto;
     display: block;
+    background: transparent;
     align-items: center;
     width: 500px;
     height: 25px;
     margin: 0 auto;
     text-align: center;
+    outline: 0;
+    border-width: 0 0 1px;
+    border-color: #edf0f1;
+}
+inputText, select, textarea{
+    color: #edf0f1;
+}
+
+.inputText:focus {
+  border-color: #d2d4d5;
 }
 
 .submitButton {
@@ -123,10 +133,37 @@ button:hover {
     overflow-y: scroll;
 }
 
-.listResults{
+.listResults {
     align-items: center;
     color: #edf0f1;
     width: 100%;
     margin: 0 auto;
     text-align: left;
+}
+
+.GoogleButton {
+    align-items: center;
+    color: #edf0f1;
+    width: 500px;
+    margin: 0 auto;
+    /*background: gray;*/
+    text-align: center;
+    /*border: 5px solid;*/
+    padding: 100px;
+    align-self: center;
+    border-left: 1px solid #edf0f1;
+    height: 400px;
+    position: absolute;
+    left: 50%;
+    margin-left: -10px;
+    top: 300px;
+}
+
+.vl {
+    border-left: 1px solid #edf0f1;
+    height: 400px;
+    position: absolute;
+    left: 50%;
+    margin-left: -10px;
+    top: 300px;
 }
