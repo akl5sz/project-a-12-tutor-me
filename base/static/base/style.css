@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&family=Roboto+Mono:ital,wght@1,300&display=swap');
+
 body {
     background: white url("images/background.png") no-repeat;
     background-size: cover;
     margin: 0px;
 }
 
-.TutoringApp{
+.TutoringApp {
     font-family: 'Edu NSW ACT Foundation', cursive;
     /*or font-family: 'Roboto Mono', monospace;*/
     font-weight: 500;
@@ -13,6 +14,7 @@ body {
     color: #edf0f1;
     text-decoration: none;
 }
+
 .navBar {
     box-sizing: border-box;
     margin: 0;
@@ -44,6 +46,7 @@ li, a, button {
 .nav__links li a {
     transition: all 0.3s ease 0s;
 }
+
 .nav__links li a:hover {
     color: #0088a9;
 }
@@ -59,4 +62,51 @@ button {
 
 button:hover {
     background-color: rgba(0, 136, 169, 0.8);
+}
+
+.coursesTitle {
+    align-items: center;
+    color: #edf0f1;
+    width: 500px;
+    margin: 0 auto;
+    /*background: gray;*/
+    text-align: center;
+    /*border: 5px solid;*/
+}
+
+.courseBox {
+    padding: 100px;
+    align-self: center;
+}
+
+.inputText {
+    margin: auto;
+    display: block;
+    align-items: center;
+    width: 500px;
+    height: 25px;
+    margin: 0 auto;
+    /*background: gray;*/
+    text-align: center;
+    /*border: 5px solid;*/
+}
+
+.submitButton {
+    margin: auto;
+    display: block;
+    align-items: center;
+    margin: 10px auto;
+    background-color: rgb(99, 32, 238);
+    text-align: center;
+}
+
+.submitButton:hover {
+    background-color: rgb(128, 117, 255);
+}
+
+.scrollable ul{
+    height:200px; width:18%;
+}
+.scrollable ul{
+    overflow:hidden; overflow-y:scroll;
 }
