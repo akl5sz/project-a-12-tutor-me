@@ -64,7 +64,7 @@ button:hover {
     background-color: rgba(0, 136, 169, 0.8);
 }
 
-.coursesTitle {
+.coursesTitle, .loginPageTitle, .GoogleButton {
     align-items: center;
     color: #edf0f1;
     width: 500px;
@@ -83,7 +83,7 @@ button:hover {
     padding: 10px;
 }
 
-.courseBox {
+.courseBox, .loginBox, .GoogleButton {
     padding: 100px;
     align-self: center;
 }
@@ -130,4 +130,3 @@ button:hover {
     margin: 0 auto;
     text-align: left;
 }
-
