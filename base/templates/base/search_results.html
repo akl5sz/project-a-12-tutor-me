@@ -3,12 +3,30 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'base/style.css' %}">
 
-<h1>Search Results</h1>
+{#<h1>Search Results</h1>#}
+{##}
+{#<ul>#}
+{#  {% for course in object_list %}#}
+{#    <li>#}
+{#      {{ course.mnem }} {{ course.num }}: {{ course.descr}}#}
+{#    </li>#}
+{#  {% endfor %}#}
+{#</ul>#}
 
-<ul>
-  {% for course in object_list %}
-    <li>
+
+
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1 class="searchResultsTitle">Search Results</h1>
+        <nav class="scrollable">
+            <ul>
+                {% for course in object_list %}
+    <li class="listResults">
       {{ course.mnem }} {{ course.num }}: {{ course.descr}}
     </li>
   {% endfor %}
-</ul>
+            </ul>
+        </nav>
+    </body>
+</html>

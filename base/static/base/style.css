@@ -74,6 +74,15 @@ button:hover {
     /*border: 5px solid;*/
 }
 
+.searchResultsTitle {
+    align-items: center;
+    color: #edf0f1;
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+}
+
 .courseBox {
     padding: 100px;
     align-self: center;
@@ -86,9 +95,7 @@ button:hover {
     width: 500px;
     height: 25px;
     margin: 0 auto;
-    /*background: gray;*/
     text-align: center;
-    /*border: 5px solid;*/
 }
 
 .submitButton {
@@ -104,9 +111,23 @@ button:hover {
     background-color: rgb(128, 117, 255);
 }
 
-.scrollable ul{
-    height:200px; width:18%;
+.scrollable ul {
+    align-items: center;
+    text-align: left;
+    color: #edf0f1;
+    height: 650px;
+    width: 35%;
+    margin: 0 auto;
+    border: 5px dotted;
+    overflow: hidden;
+    overflow-y: scroll;
 }
-.scrollable ul{
-    overflow:hidden; overflow-y:scroll;
+
+.listResults{
+    align-items: center;
+    color: #edf0f1;
+    width: 100%;
+    margin: 0 auto;
+    text-align: left;
 }
+
