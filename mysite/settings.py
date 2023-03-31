@@ -83,20 +83,14 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd6aul1lua4pikn',
-        'USER': 'nbmhwskirovoic',
-        'PASSWORD': '1dddbfe3db3a877ff82fba92638f57076e329c49de8ed5e273b667951b4eca67',
-        'HOST' : 'ec2-23-20-140-229.compute-1.amazonaws.com',
-        'PORT' : '5432'
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'dbl1b3ohfrno7u',
-        # 'USER': 'lgktgzmxzfnaxu',
-        # 'PASSWORD': 'bf13e60b3c7e0132d0e24237d2827bad75bd1f4e84993f52a018862ee6d24341',
-        # 'HOST' : 'ec2-34-194-158-176.compute-1.amazonaws.com',
+        # 'NAME': 'd6aul1lua4pikn',
+        # 'USER': 'nbmhwskirovoic',
+        # 'PASSWORD': '1dddbfe3db3a877ff82fba92638f57076e329c49de8ed5e273b667951b4eca67',
+        # 'HOST' : 'ec2-23-20-140-229.compute-1.amazonaws.com',
         # 'PORT' : '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
