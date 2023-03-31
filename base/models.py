@@ -10,6 +10,7 @@ class Profile(models.Model):
         )
     hourly_rate = models.CharField(max_length=40)
     time_frames = models.CharField(max_length=40)
+    courses = models.ManyToManyField('Course')
 
     def __str__(self):
         return '{} Hourly Rate: {} Time Frames Available: {}'.format(self.name, self.hourly_rate, self.time_frames)
@@ -18,8 +19,6 @@ class Course(models.Model):
     mnem = models.CharField(max_length=8) #Example: 'APMA'
     num = models.CharField(max_length = 8, default = "0000") #Example: '3080'
     descr = models.CharField(max_length=200) #Example: 'Linear Algebra'
-
-    #add tutor list here and have each tutor be a link to profile page
 
     def __str__(self):
         return self.mnem + " " + self.num + " " + self.descr
