@@ -10,7 +10,6 @@ class Profile(models.Model):
         )
     hourly_rate = models.CharField(max_length=40)
     time_frames = models.CharField(max_length=40)
-    courses = models.ManyToManyField('Course')
 
     def __str__(self):
         return '{} Hourly Rate: {} Time Frames Available: {}'.format(self.name, self.hourly_rate, self.time_frames)
