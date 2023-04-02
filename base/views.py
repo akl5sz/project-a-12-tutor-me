@@ -7,8 +7,8 @@ from django.shortcuts import render
 #from.models import Profile
 from .models import Students, Tutor, Course
 #from .forms import StudentForm
-#from .forms import ProfileForm
-#from .forms import AddCourseForm
+from .forms import ProfileForm
+# from .forms import AddCourseForm
 from .models import User
 
 from .decorators import allowed_users
@@ -72,13 +72,13 @@ def studentPage(request):
 
 @allowed_users(allowed_roles=['tutor'])
 def tutorPage(request):
-    # if request.method == 'POST':
-    #     form = ProfileForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         return HttpResponseRedirect('base/tutor.html')
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('base/tutor.html')
         
-    # form = ProfileForm()
+    form = ProfileForm()
     return render(request, 'base/tutor.html')
 
 
