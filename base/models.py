@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -37,7 +38,6 @@ class Tutor(models.Model):
     def __str__(self):
         return self.username
 
-
 class Course(models.Model):
     mnem = models.CharField(max_length=8) #Example: 'APMA'
     num = models.CharField(max_length = 8, default = "0000") #Example: '3080'
@@ -45,3 +45,10 @@ class Course(models.Model):
 
     def __str__(self):
         return self.mnem + " " + self.num + " " + self.descr
+    
+class User(AbstractUser):
+    hourly_rate = models.CharField(max_length = 40)
+    time_frames = models.CharField(max_length = 40)
+    classes = models.TextField(max_length=1000, default="")
+
+

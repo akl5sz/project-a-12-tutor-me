@@ -8,6 +8,7 @@ from django.shortcuts import render
 from .models import Studentss, Tutor, Course
 #from .forms import StudentForm
 #from .forms import ProfileForm
+from .forms import AddCourseForm
 from .models import User
 
 from .decorators import allowed_users
@@ -99,3 +100,12 @@ class SearchResultsView(ListView):
             Q(mnem=query) | Q(num = query) | Q(descr = query)
         )
         return object_list
+    
+def addCourse(request):
+    # if request.method == 'POST':
+    #     form = AddCourseForm(request.POST)
+        
+
+    return render(request)
+        
+
