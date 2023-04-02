@@ -14,8 +14,9 @@ from django.db.models import Value as V
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Students
-        #fields = ("full_name",)
+        fields = '__all__'
 
+        
 # class AddCourseForm(forms.Form):
 #     mnem = forms.CharField(max_length=8) #Example: 'APMA'
 #     num = forms.CharField(max_length=8) #Example: '3080'

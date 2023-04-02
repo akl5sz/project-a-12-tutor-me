@@ -5,10 +5,10 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 #from.models import Profile
-from .models import Studentss, Tutor, Course
+from .models import Students, Tutor, Course
 #from .forms import StudentForm
 #from .forms import ProfileForm
-from .forms import AddCourseForm
+#from .forms import AddCourseForm
 from .models import User
 
 from .decorators import allowed_users
@@ -55,7 +55,7 @@ def registerPage(request):
 
 def register_student(request):
     user_name = request.user.username
-    s = Studentss(username = user_name)
+    s = Students(username = user_name)
     s.save()
     return render(request, 'base/student.html')
 
