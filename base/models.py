@@ -16,17 +16,11 @@ from django.contrib.auth.models import User
 #         return '{} Hourly Rate: {} Time Frames Available: {}'.format(self.name, self.hourly_rate, self.time_frames)
 
 class Student(models.Model):
-    first_name = models.CharField(max_length = 60) #new user must enter this info when they register as a student
-    last_name = models.CharField(max_length = 60) #^
-    username = models.ForeignKey(User, on_delete=models.CASCADE)
-
-
+    full_name = models.CharField(max_length = 80)
+    #username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
+    username = User.username
     def __str__(self):
-        return self.first_name + " " + self.last_name
-
-
-
-
+        return self.full_name
 
 class Course(models.Model):
     mnem = models.CharField(max_length=8) #Example: 'APMA'

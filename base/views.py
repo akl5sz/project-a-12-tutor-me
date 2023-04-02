@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 #from.models import Profile
+from .models import Student
+from .forms import StudentForm
 #from .forms import ProfileForm
 
 from .decorators import allowed_users
@@ -62,6 +64,18 @@ def registerPage(request):
     return render(request, 'base/register.html')
 
 def register_student(request):
+    # fullName = " "
+    if request.method == 'POST': # If the form has been submitted...
+        form = StudentForm(request.POST) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            form.save()
+            fullName = form.cleaned_data['full_name']
+            # Process the data in form.cleaned_data
+            # ...
+            student = Student(full_name = fullName, username = request.user.username)
+            return HttpResponseRedirect('/thanks/') # Redirect after POST
+    else:
+        form = StudentForm() # An unbound form
 
     return render(request, 'base/student_registration.html')
 
