@@ -5,17 +5,15 @@
 
 <div class="d-flex flex-column align-items-center">
     <div style="height: 10px;"></div>
-    <h1>Tutor Page</h1>
+    <h1>Login Page</h1>
     <div style="height: 10px;"></div>
+  </div>
+  
+  {% load socialaccount %}
+ 
 
+  <body>
     <div class="d-flex flex-column align-items-center">
-        <table>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_table }}
-        </form>
-        </table>
-        <div style="height: 10px;"></div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+      <a href="{% provider_login_url 'google' %}">Login With Google</a>
     </div>
-</div>
+  </body>

@@ -91,12 +91,6 @@ DATABASES = {
         'PORT' : '5432'
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'dbl1b3ohfrno7u',
-        # 'USER': 'lgktgzmxzfnaxu',
-        # 'PASSWORD': 'bf13e60b3c7e0132d0e24237d2827bad75bd1f4e84993f52a018862ee6d24341',
-        # 'HOST' : 'ec2-34-194-158-176.compute-1.amazonaws.com',
-        # 'PORT' : '5432'
     }
 }
 
@@ -163,6 +157,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)
