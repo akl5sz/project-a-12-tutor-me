@@ -8,7 +8,7 @@ from django.shortcuts import render
 from .models import Students, Tutor, Course
 #from .forms import StudentForm
 from .forms import ProfileForm
-# from .forms import AddCourseForm
+from .forms import AddCourseForm
 from .models import User
 
 from .decorators import allowed_users
@@ -79,7 +79,7 @@ def tutorPage(request):
             return HttpResponseRedirect('base/tutor.html')
         
     form = ProfileForm()
-    return render(request, 'base/tutor.html')
+    return render(request, 'base/tutor.html',  {'form': form})
 
 
 def coursePage(request):
@@ -88,7 +88,14 @@ def coursePage(request):
     #response = base.script.url([('term', '1228')])
     # response = base.script.url([('page', 4)])
     # return render(request, 'base/courses.html', {'response' : response})
-    return render(request, 'base/courses.html')
+    if request.method == 'POST':
+        form = AddCourseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('base/courses.html')
+        
+    form = AddCourseForm()
+    return render(request, 'base/courses.html', {'form': form})
 
 
 class SearchResultsView(ListView):

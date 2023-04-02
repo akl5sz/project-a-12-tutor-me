@@ -10,7 +10,7 @@ from django.db.models import Value as V
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('hourly_rate', 'time_frames','classes')
+        fields = ('hourly_rate', 'time_frames',)
 
 class StudentForm(forms.ModelForm):
     class Meta:
@@ -18,7 +18,7 @@ class StudentForm(forms.ModelForm):
         fields = '__all__'
 
         
-class AddCourseForm(forms.ModelForm):
+class AddCourseForm(forms.Form):
     mnem = forms.CharField(max_length=8) #Example: 'APMA'
     num = forms.CharField(max_length=8) #Example: '3080'
     descr = forms.CharField(max_length=200)
