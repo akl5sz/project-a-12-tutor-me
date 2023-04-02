@@ -50,6 +50,10 @@ def tutorPage(request):
     form = ProfileForm()
     return render(request, 'base/tutor.html', {'form': form})
 
+@allowed_users(allowed_roles=['student'])
+def tutorSearch(request):
+    return render(request, 'base/tutorSearch.html')
+
 
 def coursePage(request):
     # url = "https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula." \
@@ -69,3 +73,4 @@ class SearchResultsView(ListView):
             Q(mnem=query) | Q(num = query) | Q(descr = query)
         )
         return object_list
+
