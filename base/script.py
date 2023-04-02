@@ -32,4 +32,4 @@ def main():
         flagList = [("term", 1228), ("page", str(i))]
         url(flagList)
     
-main()
+# main()
