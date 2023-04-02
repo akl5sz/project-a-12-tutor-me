@@ -1,6 +1,6 @@
 # from .models import Profile
 # from django import forms
-from .models import Student
+from .models import Students
 from django import forms
 
 # class ProfileForm(forms.ModelForm):
@@ -10,5 +10,5 @@ from django import forms
 
 class StudentForm(forms.ModelForm):
     class Meta:
-        model = Student
-        fields = ("full_name",)
+        model = Students
+        #fields = ("full_name",)

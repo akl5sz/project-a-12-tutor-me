@@ -5,13 +5,13 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 #from.models import Profile
-from .models import Student
-from .forms import StudentForm
+from .models import Studentss, Tutor, Course
+#from .forms import StudentForm
 #from .forms import ProfileForm
+from .models import User
 
 from .decorators import allowed_users
 import base.script
-from .models import Course
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 
@@ -30,21 +30,6 @@ def loginPage(request):
             return registerPage(request)
 
     return render(request, 'base/login2.html') #Puts person at the page where they can be recorded as a "user"
-    # if(request.GET.get('student')):
-    #     group = Group.objects.get(name='student')
-    #     request.user.groups.add(group)
-    #     group = Group.objects.get(name='tutor')
-    #     request.user.groups.remove(group)
-    #     return render(request, 'base/student.html')
-
-    # if(request.GET.get('tutor')):
-    #     group = Group.objects.get(name='tutor')
-    #     request.user.groups.add(group)
-    #     group = Group.objects.get(name='student')
-    #     request.user.groups.remove(group)
-    #     return render(request, 'base/tutor.html')
-    
-    # return render(request, 'base/login.html')
 
 def registerPage(request):
     if(request.GET.get('student')): #add student group attribute
@@ -55,29 +40,29 @@ def registerPage(request):
         # return render(request, 'base/student.html')
         return register_student(request)
 
-    if(request.GET.get('tutor')):
+    elif(request.GET.get('tutor')):
         group = Group.objects.get(name='tutor')
         request.user.groups.add(group)
         group = Group.objects.get(name='student')
         request.user.groups.remove(group)
-        return render(request, 'base/tutor.html')
-    return render(request, 'base/register.html')
+        # return render(request, 'base/tutor.html')
+        return register_tutor(request)
+    else:
+        return render(request, 'base/register.html')
+
+
 
 def register_student(request):
-    # fullName = " "
-    if request.method == 'POST': # If the form has been submitted...
-        form = StudentForm(request.POST) # A form bound to the POST data
-        if form.is_valid(): # All validation rules pass
-            form.save()
-            fullName = form.cleaned_data['full_name']
-            # Process the data in form.cleaned_data
-            # ...
-            student = Student(full_name = fullName, username = request.user.username)
-            return HttpResponseRedirect('/thanks/') # Redirect after POST
-    else:
-        form = StudentForm() # An unbound form
+    user_name = request.user.username
+    s = Studentss(username = user_name)
+    s.save()
+    return render(request, 'base/student.html')
 
-    return render(request, 'base/student_registration.html')
+def register_tutor(request):
+    user_name = request.user.username
+    t = Tutor(username = user_name)
+    t.save()
+    return render(request, 'base/tutor.html')
 
 @allowed_users(allowed_roles=['student'])
 def studentPage(request):
