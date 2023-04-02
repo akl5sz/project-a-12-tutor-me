@@ -1,0 +1,26 @@
+{% block nav %}{% include 'base/navbar.html' %}{% endblock nav %}
+
+{% load static %}
+
+
+<div class="d-flex flex-column align-items-center">
+
+    <h1>Hello, {{user.username}}</h1>
+
+<div>
+
+<div>
+
+
+</div class="d-flex flex-column align-items-center">
+
+    <h2>Please choose to be a tutor or student:</h2>
+    <div class="d-flex flex-column align-items-center">
+        <form action="#" method="get">
+            <input class="btn btn-primary" type="submit" class="btn" value="student" name="student">
+            <input class="btn btn-primary" type="submit" class="btn" value="tutor" name="tutor">
+        </form>
+    </div>
+
+<div>
+
