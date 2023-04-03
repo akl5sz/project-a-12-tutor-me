@@ -1,20 +1,20 @@
-from .models import Profile
+# from .models import Profile
 # from django import forms
-from .models import Students
+from .models import Student
 from .models import Course
 
 from django import forms
 from django.db.models.functions import Concat
 from django.db.models import Value as V
 
-class ProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ('hourly_rate', 'time_frames',)
+# class ProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = Profile
+#         fields = ('hourly_rate', 'time_frames',)
 
 class StudentForm(forms.ModelForm):
     class Meta:
-        model = Students
+        model = Student
         fields = '__all__'
 
         

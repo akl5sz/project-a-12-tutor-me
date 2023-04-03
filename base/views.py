@@ -5,9 +5,9 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 #from.models import Profile
-from .models import Students, Tutor, Course
+from .models import Student, Tutor, Course
 #from .forms import StudentForm
-from .forms import ProfileForm
+# from .forms import ProfileForm
 from .forms import AddCourseForm
 from .models import User
 
@@ -55,7 +55,7 @@ def registerPage(request):
 
 def register_student(request):
     user_name = request.user.username
-    s = Students(username = user_name)
+    s = Student(username = user_name)
     s.save()
     return render(request, 'base/student.html')
 
@@ -72,13 +72,14 @@ def studentPage(request):
 
 @allowed_users(allowed_roles=['tutor'])
 def tutorPage(request):
-    if request.method == 'POST':
-        form = ProfileForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('base/tutor.html')
+    # if request.method == 'POST':
+    #     form = ProfileForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         return HttpResponseRedirect('base/tutor.html')
         
-    form = ProfileForm()
+    # form = ProfileForm()
+    return render(request, 'base/tutor.html')
     return render(request, 'base/tutor.html',  {'form': form})
 
 @allowed_users(allowed_roles=['student'])
