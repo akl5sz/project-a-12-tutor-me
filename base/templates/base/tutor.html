@@ -10,24 +10,13 @@
     </h1>
     <div style="height: 10px;"></div>
     
-    <h3>Post Courses to Tutor</h3>
-   
+    <h3>Posted Courses for Tutoring:</h3>
+    {% for course in tutor_classes %} 
+    <div class="text-center mt-2 col-md-12">
+        <ol>
+            <p>{{course.mnem}} {{course.num}} {{course.descr}}</p>
+        </ol>
+    </div>
+    {% endfor %}
 
-    <div class="d-flex flex-column align-items-center">
-        <input type="text" list = "courses" placeholder = "Search for Course.." class = "form-control"
-        style="height:50;width:400;font-size:14pt;">
-
-        <datalist id = "courses">  
-            {%for course in courses %}
-                <option value="{{course}}"></option>
-            {% endfor %}
-        </datalist>
-            <button type="submit" class="btn btn-primary">
-              <i class="fas fa-search"></i>
-              Post
-            </button>
-    <div>
-    
-
-  
 </div>
