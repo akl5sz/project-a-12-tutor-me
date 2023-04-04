@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 
 from .models import Student, Tutor, Course, CourseTutored
-from .forms import PostCourseForm, TutorLookupForm
+from .forms import PostCourseForm, TutorLookupForm, PostRateForm
 from .models import User
 
 from .decorators import allowed_users
@@ -67,7 +67,7 @@ def register_tutor(request):
 #Only lets users with "student" group access page
 @allowed_users(allowed_roles=['student'])
 def studentPage(request):
-    return render(request, 'base/student.html')
+    return render(request, 'base/student_home.html')
 
 @allowed_users(allowed_roles=['student'])
 def studentFindTutor(request):
@@ -77,19 +77,25 @@ def studentFindTutor(request):
             mnem = str(form.cleaned_data['mnem']) #first find the right course
             num = str(form.cleaned_data['num'])
             descr = str(form.cleaned_data['descr'])
-            c = Course.objects.get(mnem = mnem, num = num, descr = descr)
-            c.save()
-            return render(request, "base/student_request_tutor.html", {'tutors' : c.course_all_tutors.values()}) #now simply use the course and find the tutors
+            if Course.objects.filter(mnem = mnem, num = num, descr = descr).exists(): #Ensures that an incorrect course is not posted
+                c = Course.objects.get(mnem = mnem, num = num, descr = descr)
+                c.save()
+                return render(request, "base/student_tutors_available.html", {'tutors' : c.course_all_tutors.values()}) #now simply use the course and find the tutors
     form = TutorLookupForm()
     return render(request, 'base/student_find_tutor.html', {'form': form})
 
+@allowed_users(allowed_roles=['student'])
+def studentTutorSearch(request):
+    return render(request, 'base/student_tutors_available.html')
 
+def tutorHome(request):
+    return render(request, 'base/tutor_home.html')
 
-#Only lets users with "tutor" group access page
+#View courses function
 @allowed_users(allowed_roles=['tutor'])
-def tutorPage(request):
+def viewCourses(request):
     t = Tutor.objects.get(username = request.user.username)
-    return render(request, 'base/tutor.html', {'tutor_courses': t.tutor_all_courses.values()})
+    return render(request, 'base/tutor_view_courses.html', {'tutor_courses': t.tutor_all_courses.values()})
 
 @allowed_users(allowed_roles=['tutor'])
 def postCourses(request):
@@ -108,12 +114,44 @@ def postCourses(request):
             mnem = str(form.cleaned_data['mnem'])
             num = str(form.cleaned_data['num'])
             descr = str(form.cleaned_data['descr'])
-            c = Course.objects.get(mnem = mnem, num = num, descr = descr)
-            c.save()
-            CourseTutored(tutor = t, course = c).save() #adds course to tutor object and adds tutor to course object
-            return tutorPage(request)
+            if Course.objects.filter(mnem = mnem, num = num, descr = descr).exists(): #Ensures that an incorrect course is not posted
+                c = Course.objects.get(mnem = mnem, num = num, descr = descr)
+                c.save()
+                if not CourseTutored.objects.filter(tutor = t, course = c).exists(): #Ensures that we don't add duplicate Course-Tutor relationship
+                    CourseTutored(tutor = t, course = c).save() #adds course to tutor object and adds tutor to course object
+                return viewCourses(request)
     form = PostCourseForm()
-    return render(request, 'base/course_posting.html', {'form': form})
+    return render(request, 'base/tutor_post_courses.html', {'form': form})
+
+#TO:DO
+#Ability to remove tutor's courses 
+
+
+
+
+#Hourly rate functions
+
+@allowed_users(allowed_roles=['tutor'])
+def postRate(request):
+    if request.method == "POST":
+        form = PostRateForm(request.POST)
+        if form.is_valid():
+            t = Tutor.objects.get(username = request.user.username) #find the right tutor model
+            t.save()
+            hr = str(form.cleaned_data['rate'])
+            t.hourly_rate = hr
+            t.save()
+            return viewRate(request)
+    form = PostRateForm()
+    return render(request, 'base/tutor_post_rate.html', {'form': form})
+
+
+@allowed_users(allowed_roles=['tutor'])
+def viewRate(request):
+    t = Tutor.objects.get(username = request.user.username) #find the right tutor model
+
+    return render(request, 'base/tutor_view_rate.html', {'rate': t.hourly_rate})
+
 
 def courseLookup(request):
     courses = Course.objects.all() #Used to populate courses in auto-drop down bar when Tutor searches for courses

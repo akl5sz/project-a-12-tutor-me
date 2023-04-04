@@ -27,3 +27,5 @@ class PostCourseForm(forms.Form):
     num = forms.CharField(max_length=8) #Example: '3080'
     descr = forms.CharField(max_length=200)
 
+class PostRateForm(forms.Form):
+    rate = forms.CharField(max_length = 8)

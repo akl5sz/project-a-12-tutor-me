@@ -8,10 +8,18 @@ urlpatterns = [
     path('login', views.loginPage, name='login'),
     path('register', views.registerPage, name = "register"),
     path('student', views.studentPage, name='student'),
-    path('student_find_tutor', views.studentFindTutor, name='student_find_tutor'),
-    path('student_request_tutor', views.studentFindTutor, name='student_request_tutor'),
-    path('tutor', views.tutorPage, name='tutor'),
-    path('course-posting', views.postCourses, name='course-posting'),
+    path('student-find-tutor', views.studentFindTutor, name='student-find-tutor'),
+    path('student-request-tutor', views.studentTutorSearch, name='student-request-tutor'),
+
+
+    path('tutor-home', views.tutorHome, name = 'tutor-home'),
+
+    path('post-rate', views.postRate, name='post-rate'),
+    path('view-rate', views.viewRate, name='view-rate'),
+
+    path('tutor-view-courses', views.viewCourses, name='tutor-view-courses'),
+    path('tutor-post-courses', views.postCourses, name='tutor-post-courses'),
+
     path('course-searching', views.courseLookup, name='course-searching'),
 ]
 

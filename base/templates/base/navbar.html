@@ -1,14 +1,35 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
     <div class="container-fluid collapse navbar-collapse">
         <a class="navbar-brand" href="/"> Home </a>
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <a class="nav-link" href="/student">Student Home</a>
-            <a class="nav-link" href="/student_find_tutor">Student Find Tutor</a>
-            <a class="nav-link" href="/tutor">Tutor Home</a>
-            <a class="nav-link" href="/course-posting">Tutor Post Courses</a>
-            <a class="nav-link" href="/course-searching">General Course Lookup</a>
+        <ul class="nav justify-content-center">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          Student
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="/student">Student Home</a></li>
+                    <li><a class="dropdown-item" href="/student-find-tutor">Student Find Tutor</a></li>
+                    <li><a class="dropdown-item" href="/student-request-tutor">Available Tutors</a></li>
+
+                </ul>
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                    Tutor
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                    <li><a class="dropdown-item" href="/tutor-home">Tutor Home</a></li>
+                    <li><a class="dropdown-item" href="/tutor-view-courses">Tutor View Courses</a></li>
+                    <li><a class="dropdown-item" href="/tutor-post-courses">Tutor Post Courses</a></li>
+                    <li><a class="dropdown-item" href="/view-rate">Tutor View Rate</a></li>
+                    <li><a class="dropdown-item" href="/post-rate">Tutor Post Rate</a></li>
+                </ul>
+              </div>
+              <a class="nav-link" href="/course-searching">General Course Lookup</a>
         </ul>
     </div>
     <div class="collapse navbar-collapse">
@@ -17,3 +38,7 @@
         </ul>
     </div>
 </nav>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
