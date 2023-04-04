@@ -88,6 +88,7 @@ def studentFindTutor(request):
 def studentTutorSearch(request):
     return render(request, 'base/student_tutors_available.html')
 
+@allowed_users(allowed_roles=['tutor'])
 def tutorHome(request):
     return render(request, 'base/tutor_home.html')
 
