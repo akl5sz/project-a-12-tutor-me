@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 
 from .models import Student, Tutor, Course, CourseTutored
-from .forms import PostCourseForm
+from .forms import PostCourseForm, TutorLookupForm
 from .models import User
 
 from .decorators import allowed_users
@@ -69,13 +69,27 @@ def register_tutor(request):
 def studentPage(request):
     return render(request, 'base/student.html')
 
+@allowed_users(allowed_roles=['student'])
+def studentFindTutor(request):
+    if request.method == "POST":
+        form = TutorLookupForm(request.POST)
+        if form.is_valid():
+            mnem = str(form.cleaned_data['mnem']) #first find the right course
+            num = str(form.cleaned_data['num'])
+            descr = str(form.cleaned_data['descr'])
+            c = Course.objects.get(mnem = mnem, num = num, descr = descr)
+            c.save()
+            return render(request, "base/student_request_tutor.html", {'tutors' : c.course_all_tutors.values()}) #now simply use the course and find the tutors
+    form = TutorLookupForm()
+    return render(request, 'base/student_find_tutor.html', {'form': form})
+
+
+
 #Only lets users with "tutor" group access page
 @allowed_users(allowed_roles=['tutor'])
 def tutorPage(request):
     t = Tutor.objects.get(username = request.user.username)
-
-    tutor_courses = t.tutor_all_courses.values()
-    return render(request, 'base/tutor.html', {'tutor_courses': tutor_courses})
+    return render(request, 'base/tutor.html', {'tutor_courses': t.tutor_all_courses.values()})
 
 @allowed_users(allowed_roles=['tutor'])
 def postCourses(request):
@@ -97,16 +111,13 @@ def postCourses(request):
             c = Course.objects.get(mnem = mnem, num = num, descr = descr)
             c.save()
             CourseTutored(tutor = t, course = c).save() #adds course to tutor object and adds tutor to course object
-            return render(request, "base/tutor.html", {'tutor_classes' : t.tutor_all_courses.values()})
+            return tutorPage(request)
     form = PostCourseForm()
     return render(request, 'base/course_posting.html', {'form': form})
 
-
-@allowed_users(allowed_roles=['tutor'])
 def courseLookup(request):
     courses = Course.objects.all() #Used to populate courses in auto-drop down bar when Tutor searches for courses
     return render(request, 'base/course_searching.html', {'courses' : courses})
-
     
 # def addCourse(request):
 #     # if request.method == 'POST':

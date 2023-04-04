@@ -17,7 +17,11 @@ from django.forms import Textarea
 #         model = Student
 #         fields = '__all__'
 
-        
+class TutorLookupForm(forms.Form): #finds the class then finds the tutors associated with that class
+    mnem = forms.CharField(max_length=8) #Example: 'APMA'
+    num = forms.CharField(max_length=8) #Example: '3080'
+    descr = forms.CharField(max_length=200)
+
 class PostCourseForm(forms.Form):
     mnem = forms.CharField(max_length=8) #Example: 'APMA'
     num = forms.CharField(max_length=8) #Example: '3080'

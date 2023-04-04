@@ -5,18 +5,14 @@
 
 <div class="d-flex flex-column align-items-center">
     <div style="height: 10px;"></div>
-    <h1 style = "text-transform: capitalize">
-    Welcome, Tutor {{user}}
-    </h1>
-    <div style="height: 10px;"></div>
-    
-    <h3>Posted Courses for Tutoring:</h3>
-    {% for course in tutor_courses %} 
+    <h1>Tutors Available for Course</h1>
+    {% for tutor in tutors %} 
     <div class="text-center mt-2 col-md-12">
         <ol>
-            <p>{{course.mnem}} {{course.num}} {{course.descr}}</p>
+            <p>{{tutor.username}}</p>
         </ol>
     </div>
     {% endfor %}
-
+    </form>
+    <div style="height: 10px;"></div>
 </div>
