@@ -5,17 +5,29 @@
 
 <div class="d-flex flex-column align-items-center">
     <div style="height: 10px;"></div>
-    <h1>Tutor Page</h1>
+    <h1 style = "text-transform: capitalize">
+    Welcome, Tutor {{user}}
+    </h1>
     <div style="height: 10px;"></div>
+    
+    <h3>Post Courses to Tutor</h3>
+   
 
     <div class="d-flex flex-column align-items-center">
-        <table>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_table }}
-        </form>
-        </table>
-        <div style="height: 10px;"></div>
-        <button class="btn btn-primary" type="submit">Submit</button>
-    </div>
+        <input type="text" list = "courses" placeholder = "Search for Course.." class = "form-control"
+        style="height:50;width:400;font-size:14pt;">
+
+        <datalist id = "courses">  
+            {%for course in courses %}
+                <option value="{{course}}"></option>
+            {% endfor %}
+        </datalist>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-search"></i>
+              Post
+            </button>
+    <div>
+    
+
+  
 </div>

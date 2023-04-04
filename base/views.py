@@ -13,7 +13,7 @@ from .models import User
 
 from .decorators import allowed_users
 import base.script
-from django.views.generic import TemplateView, ListView
+from django.views.generic import  ListView
 from django.db.models import Q
 
 def index(request):
@@ -52,35 +52,34 @@ def registerPage(request):
         return render(request, 'base/register.html')
 
 
-
+#Creates student object if needed
 def register_student(request):
     user_name = request.user.username
     s = Student(username = user_name)
     s.save()
     return render(request, 'base/student.html')
 
+#Creates tutor object if needed
 def register_tutor(request):
     user_name = request.user.username
     t = Tutor(username = user_name)
     t.save()
     return render(request, 'base/tutor.html')
 
+#Only lets users with "student" group access page
 @allowed_users(allowed_roles=['student'])
 def studentPage(request):
     return render(request, 'base/student.html')
 
-
+#THIS IS THE MAIN TUTOR VIEW
+#Only lets users with "tutor" group access page
 @allowed_users(allowed_roles=['tutor'])
 def tutorPage(request):
-    # if request.method == 'POST':
-    #     form = ProfileForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         return HttpResponseRedirect('base/tutor.html')
-        
-    # form = ProfileForm()
-    return render(request, 'base/tutor.html')
-    return render(request, 'base/tutor.html',  {'form': form})
+    courses = Course.objects.all() #Used to populate courses in auto-drop down bar when Tutor searches for courses
+
+    return render(request, 'base/tutor.html', {'courses' : courses})
+
+
 
 @allowed_users(allowed_roles=['student'])
 def tutorSearch(request):
@@ -116,9 +115,6 @@ class SearchResultsView(ListView):
     
 def addCourse(request):
     # if request.method == 'POST':
-    #     form = AddCourseForm(request.POST)
-        
-
+    #     form = AddCourseForm(request.POST)      
     return render(request)
-
 

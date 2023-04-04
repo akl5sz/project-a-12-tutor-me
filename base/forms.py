@@ -12,10 +12,10 @@ from django.db.models import Value as V
 #         model = Profile
 #         fields = ('hourly_rate', 'time_frames',)
 
-class StudentForm(forms.ModelForm):
-    class Meta:
-        model = Student
-        fields = '__all__'
+# class StudentForm(forms.ModelForm):
+#     class Meta:
+#         model = Student
+#         fields = '__all__'
 
         
 class AddCourseForm(forms.Form):
