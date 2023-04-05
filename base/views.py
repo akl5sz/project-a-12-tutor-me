@@ -55,14 +55,14 @@ def register_student(request):
     user_name = request.user.username
     s = Student(username = user_name)
     s.save()
-    return render(request, 'base/student.html')
+    return render(request, 'base/student_home.html')
 
 #Creates tutor object if needed
 def register_tutor(request):
     user_name = request.user.username
     t = Tutor(username = user_name)
     t.save()
-    return render(request, 'base/tutor.html')
+    return render(request, 'base/tutor_home.html')
 
 #Only lets users with "student" group access page
 @allowed_users(allowed_roles=['student'])
