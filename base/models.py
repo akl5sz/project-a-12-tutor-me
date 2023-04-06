@@ -5,21 +5,6 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
-<<<<<<< HEAD
-=======
-# class Profile(models.Model):
-#    name = models.ForeignKey(
-#         settings.AUTH_USER_MODEL,
-#         on_delete=models.CASCADE
-#         )
-#    hourly_rate = models.CharField(max_length=40, default="")
-#    time_frames = models.CharField(max_length=40, default="")
-#    classes = classes = models.TextField(max_length=1000, default="")
-
-#    def __str__(self):
-#        return '{} Hourly Rate: {} Time Frames Available: {}'.format(self.name, self.hourly_rate, self.time_frames)
-
->>>>>>> 244d1d1 (Possible fix migration error)
 class Student(models.Model):
     full_name = models.CharField(max_length = 80)
     username = models.CharField(max_length = 80)

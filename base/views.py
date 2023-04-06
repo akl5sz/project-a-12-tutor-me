@@ -2,17 +2,8 @@ from django.contrib.auth.models import Group
 from django.shortcuts import render
 from django.contrib.auth import login as logins, logout as logouts
 
-<<<<<<< HEAD
 from .models import Student, Tutor, Course, CourseTutored
 from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm
-=======
-#from.models import Profile
-from .models import Student, Tutor, Course
-#from .forms import StudentForm
-# from .forms import ProfileForm
-from .forms import AddCourseForm
-from .models import User
->>>>>>> 244d1d1 (Possible fix migration error)
 
 from .decorators import allowed_users
 
@@ -163,21 +154,8 @@ def tutorPostRate(request):
 
 
 @allowed_users(allowed_roles=['tutor'])
-<<<<<<< HEAD
 def tutorViewRate(request):
     t = Tutor.objects.get(username = request.user.username) #find the right tutor model
-=======
-def tutorPage(request):
-    # if request.method == 'POST':
-    #     form = ProfileForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         return HttpResponseRedirect('base/tutor.html')
-        
-    # form = ProfileForm()
-    return render(request, 'base/tutor.html')
-    return render(request, 'base/tutor.html',  {'form': form})
->>>>>>> 244d1d1 (Possible fix migration error)
 
     return render(request, 'base/tutor_view_rate.html', {'rate': t.hourly_rate})
 
