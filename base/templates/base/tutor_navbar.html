@@ -9,19 +9,20 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
-    <a class="navbar-brand" href="#">
-        <a href=""></a><img src={% static "base/images/uva.png" %} alt="Hi!"  width="50" height="50">
+    <a class="navbar-brand">
+        <a href="/tutor-home"><img src={% static "base/images/uva.png" %} alt="Hi!"  width="50" height="50" ></a>
     </a>
     <div class="container-fluid collapse navbar-collapse">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
             Tutor Features
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-            <li><a class="dropdown-item" href="/tutor-home">Tutor Home</a></li>
-            <li><a class="dropdown-item" href="/tutor-view-courses">Tutor View Courses</a></li>
-            <li><a class="dropdown-item" href="/tutor-post-courses">Tutor Post Courses</a></li>
-            <li><a class="dropdown-item" href="/tutor-view-rate">Tutor View Rate</a></li>
-            <li><a class="dropdown-item" href="/tutor-post-rate">Tutor Post Rate</a></li>
+            <li><a class="dropdown-item" href="/tutor-home">Home</a></li>
+            <li><a class="dropdown-item" href="/tutor-view-courses">View Courses Posted</a></li>
+            <li><a class="dropdown-item" href="/tutor-post-courses">Post New Course</a></li>
+            <li><a class="dropdown-item" href="/tutor-remove-courses">Remove Course Posted</a></li>
+            <li><a class="dropdown-item" href="/tutor-view-rate">View Hourly Rate</a></li>
+            <li><a class="dropdown-item" href="/tutor-post-rate">Post Hourly Rate</a></li>
         </ul>
     </div>
       <a class="nav-link" href="/tutor-course-lookup">General Course Lookup</a>

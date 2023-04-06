@@ -9,23 +9,22 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
-    <a class="navbar-brand" href="#">
-        <a href=""></a><img src={% static "base/images/uva.png" %} alt="Hi!"  width="50" height="50">
+    <a class="navbar-brand">
+        <a href="/student-home"><img src={% static "base/images/uva.png" %} alt="Hi!"  width="50" height="50"></a>
     </a>
     <div class="container-fluid collapse navbar-collapse">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             Student Features
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="/student-home">Student Home</a></li>
-            <li><a class="dropdown-item" href="/student-find-tutor">Student Find Tutor</a></li>
-            <!-- <li><a class="dropdown-item" href="/student-request-tutor">Available Tutors</a></li> --> 
+            <li><a class="dropdown-item" href="/student-home">Home</a></li>
+            <li><a class="dropdown-item" href="/student-find-tutor">Find Tutor</a></li>
+            <li><a class="dropdown-item" href="/student-submit-request">Submit Request</a></li>
 
         </ul>
     </div>
       <a class="nav-link" href="/student-course-lookup">General Course Lookup</a>
         <a class="nav-link" href="/logout">Log Out</a>
-
     </div>
 </nav>
 

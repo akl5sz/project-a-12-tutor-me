@@ -18,20 +18,14 @@ def url(flagList):
         courseName = courseMnemonic + " " + courseNumber + ": " + courseTitle
         if courseName not in classList:
 
-            # c = Course(mnem = courseMnemonic, num = courseNumber, descr = courseTitle)
-            # c.save()
+            c = Course(mnem = courseMnemonic, num = courseNumber, descr = courseTitle)
+            c.save()
             classList.append(courseName)
     return classList
 
 def main():
 
-    # i = 2
-    # for i in range(90):
-    #     flagList = [("term", 1228), ("page", str(i))]
-    #     list = url(flagList)
-
-    
-    for item in list:
-        print(item)
-    
-# main()
+    for i in range(90):
+        flagList = [("term", 1228), ("page", str(i))]
+        list = url(flagList)
+main()
