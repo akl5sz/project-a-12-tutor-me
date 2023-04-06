@@ -4,7 +4,13 @@
 <link rel="stylesheet" type="text/css" href="{% static 'base/style.css' %}">
 
 <div class="d-flex flex-column align-items-center">
-    <div style="height: 10px;"></div>
-    <a>You are not authorized as a {{role}}</a>
-    <div style="height: 10px;"></div>
+    <h1>Hello, {{user}}</h1>
+
+    <form method = "post">
+        {% csrf_token %}
+        <button type = "submit" value = "Logout">
+            Confirm Logout
+        </button>
+    </form>
+
 </div>

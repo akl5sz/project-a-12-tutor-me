@@ -1,0 +1,12 @@
+{% block nav %}{% include 'base/general_navbar.html' %}{% endblock nav %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'base/style.css' %}">
+
+  {% load socialaccount %}
+ 
+    <div class="d-flex flex-column align-items-center">
+      <div style="height: 30px;"></div>
+
+      <h1><a href="{% provider_login_url 'google' %}">Login With Google</a></h1>
+    </div>
