@@ -109,3 +109,153 @@ header .logo img {
 
 /*Source: https://www.devbabu.com/css-responsive-navigation-bar-with-logo/
 Nav Bar(End)*/
+
+
+/*Login Page (Start)*/
+.loginBody {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Arial', sans-serif;
+}
+
+section {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-height: 90vh !important;
+    width: 100% !important;
+}
+
+.form-box {
+    position: relative !important;
+    width: 400px !important;
+    height: 450px !important;
+    background: transparent !important;
+    border: 2px solid rgba(255, 255, 255, 0.5) !important;
+    border-radius: 20px !important;
+    backdrop-filter: blur(15px) !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.loginHeader {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 2.1em;
+    color: white;
+    text-align: center;
+}
+
+.or {
+    font-family: 'DM Sans', sans-serif;
+    transform: translateY(40%);
+    color: white;
+    text-align: center;
+}
+
+.inputbox {
+    position: relative;
+    margin: 30px 0;
+    width: 310px;
+    border-bottom: 2px solid white;
+}
+
+.inputbox label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 1em;
+    pointer-events: none;
+    transition: .5s;
+}
+
+input:focus ~ label,
+input:valid ~ label {
+    top: -5px;
+}
+
+.inputbox input {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    padding: 35px 0 5px;
+    color: white;
+}
+
+.inputbox ion-icon {
+    position: absolute;
+    right: 8px;
+    color: white;
+    font-size: 1.2em;
+    top: 20px;
+}
+
+.forget {
+    margin: -15px 0 15px;
+    font-size: .9em;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.forget label input {
+    margin-right: 3px;
+}
+
+.forget label a {
+    color: white;
+    text-decoration: none;
+}
+
+.forget label a:hover {
+    text-decoration: underline;
+}
+
+.loginButton {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    background: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.loginButton:hover {
+    color: black;
+    box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+}
+
+.googleButton {
+    transform: translateX(15%) translateY(50%) !important;
+}
+
+.or {
+    align-items: center;
+}
+
+.register {
+    font-size: .9em;
+    color: white;
+    text-align: center;
+    margin: 25px 0 10px;
+}
+
+.register p a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+.register p a:hover {
+    text-decoration: underline;
+}
+/*Login Page (End)*/
+
