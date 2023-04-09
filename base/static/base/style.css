@@ -1,8 +1,111 @@
-body {
-    background: #CAD5CA; 
-    /* background: white url("images/background.png") no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover; */
+/*Source: https://www.devbabu.com/css-responsive-navigation-bar-with-logo/
+Nav Bar(Start)*/
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    line-height: 1.5em;
 }
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    background: white url("images/background.png") no-repeat !important;
+    background-size: cover !important;
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+.navHeader {
+    background-color: #211A1D;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+}
+
+header .wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .logo img {
+    height: 50px;
+    display: block;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 100%;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    padding: 20px;
+    transition: left 0.3s;
+}
+
+.navbar.show {
+    left: 0 !important;
+}
+
+.hide-scroll {
+    overflow: hidden;
+}
+
+.navbar ul {
+    all: unset;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.navbar ul a {
+    all: unset;
+    color: #8075FF;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: bold !important;
+    font-size: 28px;
+}
+
+.navbar ul a:hover {
+    color: #CAD5CA;
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+}
+
+@media (min-width: 550px) {
+    .navbar {
+        all: unset;
+        display: block;
+    }
+
+    .navbar ul {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .navbar ul a {
+        font-size: inherit;
+    }
+
+    .close-nav,
+    .menu-bar {
+        display: none;
+    }
+}
+
+/*Source: https://www.devbabu.com/css-responsive-navigation-bar-with-logo/
+Nav Bar(End)*/
