@@ -110,7 +110,6 @@ header .logo img {
 /*Source: https://www.devbabu.com/css-responsive-navigation-bar-with-logo/
 Nav Bar(End)*/
 
-
 /*Login Page (Start)*/
 .loginBody {
     margin: 0 !important;
@@ -258,4 +257,3 @@ input:valid ~ label {
     text-decoration: underline;
 }
 /*Login Page (End)*/
-
