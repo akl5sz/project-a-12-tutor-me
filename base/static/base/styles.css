@@ -257,3 +257,22 @@ input:valid ~ label {
     text-decoration: underline;
 }
 /*Login Page (End)*/
+
+/*Register Page(Start)*/
+.becomeTutor{
+    width: 100% !important;
+    height: 40px !important;
+    border-radius: 40px !important;
+    background: white !important;
+    border: none !important;
+    outline: none !important;
+    cursor: pointer !important;
+    font-size: 1em !important;
+    font-weight: 600 !important;
+}
+
+.becomeTutor:hover {
+    color: black;
+    box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+}
+/*Register Page(End)*/
