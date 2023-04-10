@@ -23,9 +23,9 @@ class Tutor(models.Model):
         return self.username
     
 class Course(models.Model):
-    mnem = models.CharField(max_length=8) #Example: 'APMA'
-    num = models.CharField(max_length = 8, default = "0000") #Example: '3080'
-    descr = models.CharField(max_length=200) #Example: 'Linear Algebra'
+    department = models.CharField(max_length=8) #Example: 'APMA'
+    number = models.CharField(max_length = 8, default = "0000") #Example: '3080'
+    name = models.CharField(max_length=200) #Example: 'Linear Algebra'
     #Represents the list of tutors for a particular course (allows students to view tutors for that course)
     course_all_tutors = models.ManyToManyField('Tutor', through = 'CourseTutored')
 

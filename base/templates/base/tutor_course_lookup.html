@@ -9,10 +9,10 @@
         <h1 style="color:aliceblue;">Search for Courses</h1>
 
         <input type="text" list = "courses" placeholder = "Search for Course.." class = "form-control"
-        style="height:50;width:400;font-size:14pt;color:aliceblue;"">
+        style="height:50;width:400;font-size:14pt;color:aliceblue;">
         <datalist id = "courses">  
             {%for course in courses %}
                 <option value="{{course}}"></option>
             {% endfor %}
         </datalist>
-    <div>
+    </div>
