@@ -6,13 +6,13 @@
     <div class="d-flex flex-column align-items-center">
         <div style="height: 10px;"></div>
 
-        <h1>Search for Courses</h1>
+        <h1 style="color:aliceblue;">Search for Courses</h1>
 
         <input type="text" list = "courses" placeholder = "Search for Course.." class = "form-control"
         style="height:50;width:400;font-size:14pt;">
         <datalist id = "courses">  
             {%for course in courses %}
-                <option value="{{course}}"></option>
+                <option style="color:aliceblue;" value="{{course}}"></option>
             {% endfor %}
         </datalist>
-    <div>
+    </div>
