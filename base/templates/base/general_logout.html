@@ -4,11 +4,11 @@
 <link rel="stylesheet" type="text/css" href="{% static 'base/styles.css' %}">
 
 <div class="d-flex flex-column align-items-center">
-    <h1>Hello, {{user}}</h1>
+    <h1 style="color:aliceblue;">Hello, {{user}}</h1>
 
     <form method = "post">
         {% csrf_token %}
-        <button type = "submit" value = "Logout">
+        <button type = "submit" value = "Logout" style="color: aliceblue;">
             Confirm Logout
         </button>
     </form>

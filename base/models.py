@@ -30,7 +30,7 @@ class Course(models.Model):
     course_all_tutors = models.ManyToManyField('Tutor', through = 'CourseTutored')
 
     def __str__(self):
-        return self.mnem + " " + self.num + " " + self.descr
+        return self.department + " " + self.number + " " + self.name
 
 #Django "Through" tables that establishes direct connection between Tutors and Courses
 class CourseTutored(models.Model):
