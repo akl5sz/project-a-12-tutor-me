@@ -226,15 +226,18 @@ input:valid ~ label {
     cursor: pointer;
     font-size: 1em;
     font-weight: 600;
+    display: block;
 }
 
 .loginButton:hover {
     color: black;
     box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+    display: block;
 }
 
 .googleButton {
     transform: translateX(15%) translateY(50%) !important;
+    display: block;
 }
 
 .or {

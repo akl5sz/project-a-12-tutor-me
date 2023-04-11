@@ -4,14 +4,12 @@
 <link rel="stylesheet" type="text/css" href="{% static 'base/styles.css' %}">
 <title>Tutor Me</title>
 
-<body>
-
+<body class="joemama">
 <div class="container">
     <h1> <span class="auto-type"></span></h1>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-
 <script>
     var typed = new Typed(".auto-type",{
         strings: ["Tutor Me", "Learning", "Success"],
@@ -22,29 +20,25 @@
 </script>
 
 <style>
-    * {
+    .joemama {
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
         font-family: 'Poppins', sans-serif;
     }
     .container{
         width: 100%;
-        height: 100vh;
         color: #fff;
-        display: flex;
         align-items: center;
         justify-content: center;
-        transform: translateY(-10%);
+        transform: translateY(200%) translateX(37%);
     }
 
     .container h1{
         font-size: 80px;
         font-weight: 600;
     }
-
     span{
-        color: white;
+        color: #F8F0FB;
     }
 </style>
 </body>
