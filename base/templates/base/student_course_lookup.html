@@ -3,55 +3,55 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'base/styles.css' %}">
 
-    <div class="d-flex flex-column align-items-center">
-        <div class="courseBox" style="height: 10px;">
-            <h1 class="coursesTitle" style="color:aliceblue;">Search for Courses</h1>
-        </div>
-
-        <input class="inputText" type="text" list = "courses" placeholder = "Enter Course Name..." class = "form-control"
-        style="height: 50px; width:400px; font-size:14pt; color: #edf0f1">
-        <datalist id = "courses">  
-            {%for course in courses %}
-                <option value="{{course}}"></option>
-            {% endfor %}
-        </datalist>
+<div class="d-flex flex-column align-items-center">
+    <div class="courseBox" style="height: 10px;">
+        <h1 class="coursesTitle" style="color:aliceblue;">Search for Courses</h1>
     </div>
+
+    <input class="inputText" type="text" list="courses" placeholder="Enter Course Name..." class="form-control"
+           style="height: 50px; width:400px; font-size:14pt; color: #edf0f1">
+    <datalist id="courses">
+        {% for course in courses %}
+            <option value="{{ course }}"></option>
+        {% endfor %}
+    </datalist>
+</div>
 <style>
     .coursesTitle {
-    align-items: center;
-    color: #edf0f1;
-    width: 500px;
-    margin: 0 auto;
-    /*background: gray;*/
-    text-align: center;
-    /*border: 5px solid;*/
-}
-.courseBox {
-    padding: 100px;
-    align-self: center;
-}
+        align-items: center;
+        color: #edf0f1;
+        width: 500px;
+        margin: 0 auto;
+        text-align: center;
+    }
 
-.inputText {
-    display: block;
-    background: transparent;
-    align-items: center;
-    width: 500px;
-    height: 25px;
-    margin: 0 auto;
-    text-align: center;
-    outline: 0;
-    border-width: 0 0 1px;
-    border-color: #edf0f1;
-}
-inputText, select, textarea{
-    color: #edf0f1;
-}
-input::placeholder{
-  color: #edf0f1;
-}
+    .courseBox {
+        padding: 100px;
+        align-self: center;
+    }
 
-.inputText:focus {
-  border-color: #d2d4d5;
-}
+    .inputText {
+        display: block;
+        background: transparent;
+        align-items: center;
+        width: 500px;
+        height: 25px;
+        margin: 0 auto;
+        text-align: center;
+        outline: 0;
+        border-width: 0 0 1px;
+        border-color: #edf0f1;
+    }
 
+    inputText, select, textarea {
+        color: #edf0f1;
+    }
+
+    input::placeholder {
+        color: #746B76;
+    }
+
+    .inputText:focus {
+        border-color: #d2d4d5;
+    }
 </style>
