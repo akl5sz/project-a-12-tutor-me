@@ -95,10 +95,14 @@ def studentFindTutor(request):
             if Course.objects.filter(department=department, number=number,
                                      name=name).exists():  # Ensures that an incorrect course is not posted
                 c = Course.objects.get(department=department, number=number, name=name)
+
+                #NEED TO ADD FORM HERE
+
                 return render(request, "base/student_tutors_available.html",
                               {'tutors': c.course_all_tutors.values()})  # now simply use the course and find the tutors
     form = TutorLookupForm()
     return render(request, 'base/student_find_tutor.html', {'form': form})
+
 
 
 @allowed_users(allowed_roles=['student'])
