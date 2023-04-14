@@ -5,6 +5,9 @@ from django.contrib.auth import login as logins, logout as logouts
 from .models import Student, Tutor, Course, CourseTutored
 from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm
 
+from django.views.generic import ListView
+from django.db.models import Q
+
 from .decorators import allowed_users
 
 
@@ -148,6 +151,46 @@ def tutorPostCourses(request):
     form = TutorPostCourseForm()
     return render(request, 'base/tutor_post_course.html', {'form': form})
 
+# class SearchResultsView(ListView):
+#     model = Course
+#     template_name = 'base/search_results.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super(SearchResultsView, self).get_context_data(**kwargs)
+#         context['form'] = TutorPostCourseForm()
+#         return context
+    
+#     def get_queryset(self):  # new
+#         query = self.request.GET.get("q")
+#         object_list = Course.objects.filter(
+#             Q(department=query) | Q(number = query) | Q(name = query)
+#         )
+#         return object_list
+
+def SearchResultsView(request):
+    if request.method == "GET":
+        query = request.GET.get("q")
+        object_list = Course.objects.filter(
+            Q(department=query) | Q(number = query) | Q(name = query)
+        )
+        return render(request, 'base/search_results.html', {'object_list': object_list})
+    if request.method == "POST":
+        form = TutorPostCourseForm(request.POST)
+        if form.is_valid():
+            t = Tutor.objects.get(username=request.user.username)  # find the right tutor model
+            department = str(form.cleaned_data['department'])
+            number = str(form.cleaned_data['number'])
+            name = str(form.cleaned_data['name'])
+            if Course.objects.filter(department=department, number=number,
+                                     name=name).exists():  # Ensures that an incorrect course is not posted
+                c = Course.objects.get(department=department, number=number, name=name)
+                if not CourseTutored.objects.filter(tutor=t,
+                                                    course=c).exists():  # Ensures that we don't add duplicate Course-Tutor relationship
+                    CourseTutored(tutor=t,
+                                  course=c).save()  # adds course to tutor object and adds tutor to course object
+                return tutorViewCourses(request)
+    form = TutorPostCourseForm()
+    return render(request, 'base/search_results.html', {'form': form})
 
 def tutorRemoveCourses(request):
     if request.method == "POST":

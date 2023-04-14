@@ -22,4 +22,6 @@ urlpatterns = [
 
     path('tutor-course-lookup', views.tutorCourseLookup, name='tutor-course-lookup'),
     path('student-course-lookup', views.studentCourseLookup, name='student-course-searching'),
+
+    path('search/', views.SearchResultsView, name='search_results'),
 ]
