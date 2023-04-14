@@ -9,7 +9,13 @@
     {% for tutor in tutors %} 
     <div class="text-center mt-2 col-md-12">
         <ol>
-            <p style="color:aliceblue;">{{tutor.username}}</p>
+            <p style="color:aliceblue;">{{tutor.username}}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="username" value={{tutor.username}}>
+                    <button type="submit" class="btn btn-primary" >request tutor</button>
+                </form>
+            </p>
         </ol>
     </div>
     {% endfor %}
