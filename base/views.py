@@ -172,7 +172,8 @@ def tutorPostRate(request):
             t = Tutor.objects.get(username=request.user.username)  # find the right tutor model
             hr = str(form.cleaned_data['rate'])
             t.hourly_rate = hr
-            t
+            t.save()
+            print(hr)
             return tutorViewRate(request)
     form = TutorPostRateForm()
     return render(request, 'base/tutor_post_rate.html', {'form': form})
