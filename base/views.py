@@ -155,7 +155,7 @@ def tutorCourseLookup(request):
                                                     course=c).exists():  # Ensures that we don't add duplicate Course-Tutor relationship
                     CourseTutored(tutor=t,
                                   course=c).save()  # adds course to tutor object and adds tutor to course object
-                return tutorViewCourses(request)
+                return redirect('base:tutor-view-courses')
     form = TutorPostCourseForm()
     return render(request, 'base/tutor_search_course.html', {'form': form})
 
