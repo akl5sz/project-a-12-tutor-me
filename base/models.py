@@ -42,6 +42,7 @@ class CourseTutored(models.Model):
 
 
 class Notification(models.Model):
+    info = models.CharField(max_length=200, default="0")
     course = models.CharField(max_length=200)
     student = models.ForeignKey(Student, on_delete = models.CASCADE)
     tutor = models.ForeignKey(Tutor, on_delete = models.CASCADE)

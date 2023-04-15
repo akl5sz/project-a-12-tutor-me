@@ -132,6 +132,8 @@ def studentSubmitRequest(request):
     student = Student.objects.get(username=request.user.username)
     tutor = request.session['tutor']
 
+    if request.method == "POST":
+        ""
     return render(request, 'base/student_submit_request.html', {'course': course, 'student': student, 'tutor': tutor})
 
 
