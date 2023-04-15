@@ -103,13 +103,19 @@ def studentCourseLookup(request):
             if Course.objects.filter(department=department, number=number,
                                      name=name).exists():  # Ensures that an incorrect course is not posted
                 c = Course.objects.get(department=department, number=number, name=name)
-                return studentTutorSearch(request, c.course_all_tutors.values())  # now simply use the course and find the tutors
+                return studentTutorSearch(request, c, c.course_all_tutors.values())  # now simply use the course and find the tutors
     form = TutorLookupForm()
     return render(request, 'base/student_search_course.html', {'form': form})
 
 @allowed_users(allowed_roles=['student'])
-def studentTutorSearch(request, tutors):
-    return render(request, 'base/student_tutors_available.html', {'tutors': tutors})
+def studentTutorSearch(request, course, tutors):
+    # if request.method == "POST":
+    #     form = #todo
+    # return render(request, 'base/student_tutors_available.html', {'form': form, 'course': course, 'tutors': tutors})
+    if request.method == "POST":
+        
+        return
+    return render(request, 'base/student_tutors_available.html', {'course': course, 'tutors': tutors})
 
 @allowed_users(allowed_roles=['student'])
 def studentSubmitRequest(request):
