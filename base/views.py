@@ -2,7 +2,7 @@ from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as logins, logout as logouts
 
-from .models import Student, Tutor, Course, CourseTutored
+from .models import Student, Tutor, Course, CourseTutored, Notification
 from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm
 
 from django.views.generic import ListView
@@ -102,8 +102,7 @@ def studentCourseLookup(request):
             department = str(form.cleaned_data['department'])  # first find the right course
             number = str(form.cleaned_data['number'])
             name = str(form.cleaned_data['name'])
-            if Course.objects.filter(department=department, number=number,
-                                     name=name).exists():  # Ensures that an incorrect course is not posted
+            if Course.objects.filter(department=department, number=number, name=name).exists():  # Ensures that an incorrect course is not posted
                 c = Course.objects.get(department=department, number=number, name=name)
 
                 request.session['department'] = department
@@ -131,11 +130,18 @@ def studentSubmitRequest(request):
     course = Course.objects.get(department=request.session['department'], number=request.session['number'], name=request.session['name'])
     student = Student.objects.get(username=request.user.username)
     tutor = request.session['tutor']
-
+    info = "0"
     if request.method == "POST":
-        ""
+        if not Notification.objects.filter(info=info, course=course, student=student,tutor=tutor).exists():  # Ensures that we don't add duplicate Course-Tutor relationship
+            Notification(info=info, course=course, student=student,tutor=tutor).save()  # adds course to tutor object and adds tutor to course object
+            return redirect('base:student-notification')
     return render(request, 'base/student_submit_request.html', {'course': course, 'student': student, 'tutor': tutor})
 
+@allowed_users(allowed_roles=['student'])
+def studentNotification(request):
+    student = Student.objects.get(username=request.user.username)
+    student.student_all_tutors.values()
+    return render(request, 'base/student_notification.html')
 
 # -----------------------------------------------
 
@@ -159,13 +165,10 @@ def tutorCourseLookup(request):
             department = str(form.cleaned_data['department'])
             number = str(form.cleaned_data['number'])
             name = str(form.cleaned_data['name'])
-            if Course.objects.filter(department=department, number=number,
-                                     name=name).exists():  # Ensures that an incorrect course is not posted
+            if Course.objects.filter(department=department, number=number, name=name).exists():  # Ensures that an incorrect course is not posted
                 c = Course.objects.get(department=department, number=number, name=name)
-                if not CourseTutored.objects.filter(tutor=t,
-                                                    course=c).exists():  # Ensures that we don't add duplicate Course-Tutor relationship
-                    CourseTutored(tutor=t,
-                                  course=c).save()  # adds course to tutor object and adds tutor to course object
+                if not CourseTutored.objects.filter(tutor=t, course=c).exists():  # Ensures that we don't add duplicate Course-Tutor relationship
+                    CourseTutored(tutor=t, course=c).save()  # adds course to tutor object and adds tutor to course object
                 return redirect('base:tutor-view-courses')
     form = TutorPostCourseForm()
     return render(request, 'base/tutor_search_course.html', {'form': form})
@@ -181,8 +184,7 @@ def tutorViewCourses(request):
             department = str(form.cleaned_data['department'])
             number = str(form.cleaned_data['number'])
             name = str(form.cleaned_data['name'])
-            if Course.objects.filter(department=department, number=number,
-                                     name=name).exists():  # Ensures that an incorrect course is not posted
+            if Course.objects.filter(department=department, number=number, name=name).exists():  # Ensures that an incorrect course is not posted
                 c = Course.objects.get(department=department, number=number, name=name)
                 CourseTutored.objects.filter(tutor=t, course=c).delete()
                 return redirect('base:tutor-view-courses')
@@ -213,5 +215,3 @@ def tutorViewRate(request):
 
 # -------------------------------------------------------------------------------
 
-def notification(request):
-    return render(request, 'base/notification.html')

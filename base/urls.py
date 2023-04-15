@@ -12,11 +12,12 @@ urlpatterns = [
     path('student-course-lookup', views.studentCourseLookup, name='student-course-lookup'),
     path('student-request-tutor', views.studentTutorSearch, name='student-request-tutor'),
     path('student-submit-request', views.studentSubmitRequest, name='student-submit-request'),
+    path('student-notification', views.studentNotification, name='student-notification'),
 
     path('tutor-home', views.tutorHome, name = 'tutor-home'),
     path('tutor-course-lookup', views.tutorCourseLookup, name='tutor-course-lookup'),
     path('tutor-post-rate', views.tutorPostRate, name='post-rate'),
     path('tutor-view-rate', views.tutorViewRate, name='view-rate'),
     path('tutor-view-courses', views.tutorViewCourses, name='tutor-view-courses'),
-    
+
 ]

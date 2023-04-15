@@ -9,7 +9,7 @@ class Student(models.Model):
     full_name = models.CharField(max_length = 80)
     username = models.CharField(max_length = 80)
 
-    stduent_all_tutors = models.ManyToManyField('Tutor', through = 'Notification')
+    student_all_tutors = models.ManyToManyField('Tutor', through = 'Notification')
 
     def __str__(self):
         return self.username
