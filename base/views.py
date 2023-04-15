@@ -67,7 +67,8 @@ def registerPage(request):
 def register_student(request):
     user_name = request.user.username
     s = Student(username=user_name)
-    s.save()
+    if not Student.objects.filter(username=user_name).exists():
+        s.save()
     return render(request, 'base/student_home.html')
 
 
@@ -75,7 +76,8 @@ def register_student(request):
 def register_tutor(request):
     user_name = request.user.username
     t = Tutor(username=user_name)
-    t.save()
+    if not Tutor.objects.filter(username=user_name).exists():
+        t.save()
     return render(request, 'base/tutor_home.html')
 
 
