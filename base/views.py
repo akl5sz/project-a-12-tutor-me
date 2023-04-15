@@ -210,3 +210,6 @@ def tutorViewRate(request):
     return render(request, 'base/tutor_view_rate.html', {'rate': t.hourly_rate})
 
 # -------------------------------------------------------------------------------
+
+def notification(request):
+    return render(request, 'base/notification.html')

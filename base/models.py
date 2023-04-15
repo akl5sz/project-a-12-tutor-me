@@ -9,6 +9,8 @@ class Student(models.Model):
     full_name = models.CharField(max_length = 80)
     username = models.CharField(max_length = 80)
 
+    stduent_all_tutors = models.ManyToManyField('Tutor', through = 'Notification')
+
     def __str__(self):
         return self.username
     
@@ -18,6 +20,7 @@ class Tutor(models.Model):
     time_frames = models.CharField(max_length = 40)
     #Represents the list of courses for a particular tutor (courses the tutor has posted)
     tutor_all_courses = models.ManyToManyField('Course', through = 'CourseTutored')
+    tutor_all_students = models.ManyToManyField('Student', through = 'Notification')
 
     def __str__(self):
         return self.username
@@ -37,3 +40,11 @@ class CourseTutored(models.Model):
     tutor = models.ForeignKey(Tutor, on_delete = models.CASCADE)
     course = models.ForeignKey(Course, on_delete = models.CASCADE)
 
+
+class Notification(models.Model):
+    course = models.CharField(max_length=200)
+    student = models.ForeignKey(Student, on_delete = models.CASCADE)
+    tutor = models.ForeignKey(Tutor, on_delete = models.CASCADE)
+
+    def __str__(self):
+        return self.course + " " + self.student + " " + self.tutor
