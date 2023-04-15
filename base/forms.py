@@ -19,5 +19,4 @@ class TutorRemoveCourseForm(forms.Form):
     name = forms.CharField(max_length=200)
 
 class StudentRequestTutorForm(forms.Form):
-    course = forms.CharField(max_length=200)
     tutor = forms.CharField(max_length=40)

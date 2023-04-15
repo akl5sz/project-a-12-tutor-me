@@ -117,21 +117,22 @@ def studentCourseLookup(request):
 @allowed_users(allowed_roles=['student'])
 def studentTutorSearch(request):
     course = Course.objects.get(department=request.session['department'], number=request.session['number'], name=request.session['name'])
-    #currently not working
     if request.method == "POST":
         form = StudentRequestTutorForm(request.POST)
         if form.is_valid():
-            course = str(form.cleaned_data['course'])
             tutor = str(form.cleaned_data['tutor'])
+            request.session['tutor'] = tutor
             return redirect('base:student-submit-request')
     form = StudentRequestTutorForm(request.POST)
     return render(request, 'base/student_tutors_available.html', {'form': form, 'course': course, 'tutors': request.session['tutors']})
 
 @allowed_users(allowed_roles=['student'])
 def studentSubmitRequest(request):
-
+    course = Course.objects.get(department=request.session['department'], number=request.session['number'], name=request.session['name'])
     student = Student.objects.get(username=request.user.username)
-    return render(request, 'base/student_submit_request.html')
+    tutor = request.session['tutor']
+
+    return render(request, 'base/student_submit_request.html', {'course': course, 'student': student, 'tutor': tutor})
 
 
 # -----------------------------------------------
