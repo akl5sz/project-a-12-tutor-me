@@ -1,0 +1,28 @@
+{% block nav %}{% include 'base/student_navbar.html' %}{% endblock nav %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'base/styles.css' %}">
+
+<div>
+  <div style="height: 10px;"></div>
+  <form action="{% url 'base:student-course-lookup' %}" method="get">
+      <input class="inputText" name="q" type="text" placeholder="Search for a course...">
+      <button class="submitButton" type="submit">Submit</button>
+  </form>
+
+  <h1>Search Course for Tutor</h1>
+  <ul>
+    {% for course in object_list %}
+      <li style="color:aliceblue;">
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="department" value='{{ course.department }}'>
+          <input type="hidden" name="number" value='{{ course.number }}'>
+          <input type="hidden" name="name" value='{{ course.name }}'>
+          <button type="submit" class="btn btn-primary" >{{ course.department }} {{ course.number }} : {{ course.name}}</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+

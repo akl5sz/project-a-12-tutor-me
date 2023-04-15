@@ -12,7 +12,7 @@
             <p style="color:aliceblue;">{{tutor.username}}
                 <form method="post">
                     {% csrf_token %}
-                    <input type="hidden" name="username" value={{tutor.username}}>
+                    <input type="hidden" name="username" value='{{tutor.username}}''>
                     <button type="submit" class="btn btn-primary" >request tutor</button>
                 </form>
             </p>

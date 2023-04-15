@@ -88,27 +88,6 @@ def studentHome(request):
 
 
 @allowed_users(allowed_roles=['student'])
-def studentFindTutor(request):
-    if request.method == "POST":
-        form = TutorLookupForm(request.POST)
-        if form.is_valid():
-            department = str(form.cleaned_data['department'])  # first find the right course
-            number = str(form.cleaned_data['number'])
-            name = str(form.cleaned_data['name'])
-            if Course.objects.filter(department=department, number=number,
-                                     name=name).exists():  # Ensures that an incorrect course is not posted
-                c = Course.objects.get(department=department, number=number, name=name)
-
-                #NEED TO ADD FORM HERE
-
-                return render(request, "base/student_tutors_available.html",
-                              {'tutors': c.course_all_tutors.values()})  # now simply use the course and find the tutors
-    form = TutorLookupForm()
-    return render(request, 'base/student_find_tutor.html', {'form': form})
-
-
-
-@allowed_users(allowed_roles=['student'])
 def studentTutorSearch(request):
     return render(request, 'base/student_tutors_available.html')
 
@@ -174,8 +153,25 @@ def tutorViewRate(request):
 # -------------------------------------------------------------------------------
 
 def studentCourseLookup(request):
-    courses = Course.objects.all()  # Used to populate courses in auto-drop down bar when Student searches for courses
-    return render(request, 'base/student_course_lookup.html', {'courses': courses})
+    if request.method == "GET":
+        query = request.GET.get("q")
+        object_list = Course.objects.filter(
+            Q(department=query) | Q(number = query) | Q(name = query)
+        )
+        return render(request, 'base/student_search_course.html', {'object_list': object_list})
+    if request.method == "POST":
+        form = TutorLookupForm(request.POST)
+        if form.is_valid():
+            department = str(form.cleaned_data['department'])  # first find the right course
+            number = str(form.cleaned_data['number'])
+            name = str(form.cleaned_data['name'])
+            if Course.objects.filter(department=department, number=number,
+                                     name=name).exists():  # Ensures that an incorrect course is not posted
+                c = Course.objects.get(department=department, number=number, name=name)
+                return render(request, "base/student_tutors_available.html",
+                              {'tutors': c.course_all_tutors.values()})  # now simply use the course and find the tutors
+    form = TutorLookupForm()
+    return render(request, 'base/student_search_course.html', {'form': form})
 
 @allowed_users(allowed_roles=['tutor'])
 def tutorCourseLookup(request):

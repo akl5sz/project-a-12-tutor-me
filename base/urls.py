@@ -9,7 +9,6 @@ urlpatterns = [
     path('register', views.registerPage, name = "register"),
 
     path('student-home', views.studentHome, name='student-home'),
-    path('student-find-tutor', views.studentFindTutor, name='student-find-tutor'),
     path('student-request-tutor', views.studentTutorSearch, name='student-request-tutor'),
     path('student-submit-request', views.studentSubmitRequest, name='student-submit-request'),
 
@@ -20,5 +19,5 @@ urlpatterns = [
     path('tutor-remove-courses', views.tutorRemoveCourses, name='tutor-remove-courses'),
 
     path('tutor-course-lookup', views.tutorCourseLookup, name='tutor-course-lookup'),
-    path('student-course-lookup', views.studentCourseLookup, name='student-course-searching'),
+    path('student-course-lookup', views.studentCourseLookup, name='student-course-lookup'),
 ]
