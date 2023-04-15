@@ -86,6 +86,7 @@ def register_tutor(request):
 def studentHome(request):
     return render(request, 'base/student_home.html')
 
+@allowed_users(allowed_roles=['student'])
 def studentCourseLookup(request):
     if request.method == "GET":
         query = request.GET.get("q")
@@ -102,16 +103,15 @@ def studentCourseLookup(request):
             if Course.objects.filter(department=department, number=number,
                                      name=name).exists():  # Ensures that an incorrect course is not posted
                 c = Course.objects.get(department=department, number=number, name=name)
-                return render(request, "base/student_tutors_available.html",
-                              {'tutors': c.course_all_tutors.values()})  # now simply use the course and find the tutors
+                return studentTutorSearch(request, c.course_all_tutors.values())  # now simply use the course and find the tutors
     form = TutorLookupForm()
     return render(request, 'base/student_search_course.html', {'form': form})
 
 @allowed_users(allowed_roles=['student'])
-def studentTutorSearch(request):
-    return render(request, 'base/student_tutors_available.html')
+def studentTutorSearch(request, tutors):
+    return render(request, 'base/student_tutors_available.html', {'tutors': tutors})
 
-
+@allowed_users(allowed_roles=['student'])
 def studentSubmitRequest(request):
     return render(request, 'base/student_submit_request.html')
 
@@ -155,6 +155,7 @@ def tutorViewCourses(request):
     t = Tutor.objects.get(username=request.user.username)
     return render(request, 'base/tutor_view_courses.html', {'tutor_courses': t.tutor_all_courses.values()})
 
+@allowed_users(allowed_roles=['tutor'])
 def tutorRemoveCourses(request):
     if request.method == "POST":
         form = TutorRemoveCourseForm(request.POST)
