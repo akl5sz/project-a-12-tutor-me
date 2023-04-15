@@ -5,12 +5,12 @@
 
 <div>
   <div style="height: 10px;"></div>
-  <form action="{% url 'base:search_results' %}" method="get">
+  <form action="{% url 'base:tutor-course-lookup' %}" method="get">
       <input class="inputText" name="q" type="text" placeholder="Search for a course...">
       <button class="submitButton" type="submit">Submit</button>
   </form>
-  <h1>Search Results</h1>
 
+  <h1>Add Course to Profile</h1>
   <ul>
     {% for course in object_list %}
       <li style="color:aliceblue;">
