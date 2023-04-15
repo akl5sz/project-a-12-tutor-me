@@ -11,6 +11,13 @@
     <div class="text-center mt-2 col-md-12">
         <ol>
             <p style="color:aliceblue;">{{course.department}} {{course.number}} {{course.name}}</p>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="department" value='{{ course.department }}'>
+                <input type="hidden" name="number" value='{{ course.number }}'>
+                <input type="hidden" name="name" value='{{ course.name }}'>
+                <button type="submit" class="btn btn-primary" >remove course from profile</button>
+              </form>
         </ol>
     </div>
     {% endfor %}

@@ -163,10 +163,6 @@ def tutorCourseLookup(request):
 @allowed_users(allowed_roles=['tutor'])
 def tutorViewCourses(request):
     t = Tutor.objects.get(username=request.user.username)
-    return render(request, 'base/tutor_view_courses.html', {'tutor_courses': t.tutor_all_courses.values()})
-
-@allowed_users(allowed_roles=['tutor'])
-def tutorRemoveCourses(request):
     if request.method == "POST":
         form = TutorRemoveCourseForm(request.POST)
         if form.is_valid():
@@ -178,10 +174,9 @@ def tutorRemoveCourses(request):
                                      name=name).exists():  # Ensures that an incorrect course is not posted
                 c = Course.objects.get(department=department, number=number, name=name)
                 CourseTutored.objects.filter(tutor=t, course=c).delete()
-                return tutorViewCourses(request)
+                return redirect('base:tutor-view-courses')
     form = TutorRemoveCourseForm()
-    return render(request, 'base/tutor_remove_course.html', {'form': form})
-
+    return render(request, 'base/tutor_view_courses.html', {'form': form, 'tutor_courses': t.tutor_all_courses.values()})
 
 # Hourly rate functions
 @allowed_users(allowed_roles=['tutor'])
