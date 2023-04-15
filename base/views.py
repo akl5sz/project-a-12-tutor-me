@@ -105,24 +105,30 @@ def studentCourseLookup(request):
             if Course.objects.filter(department=department, number=number,
                                      name=name).exists():  # Ensures that an incorrect course is not posted
                 c = Course.objects.get(department=department, number=number, name=name)
-                return studentTutorSearch(request, c, c.course_all_tutors.values())  # now simply use the course and find the tutors
+
+                request.session['department'] = department
+                request.session['number'] = number
+                request.session['name'] = name
+                request.session['tutors'] = list(c.course_all_tutors.values()) # store tutor search in user session
+                return redirect('base:student-request-tutor')
     form = TutorLookupForm()
     return render(request, 'base/student_search_course.html', {'form': form})
 
 @allowed_users(allowed_roles=['student'])
-def studentTutorSearch(request, course, tutors):
-
-    #currently not working because the POST request is nested under the function above
+def studentTutorSearch(request):
+    course = Course.objects.get(department=request.session['department'], number=request.session['number'], name=request.session['name'])
+    #currently not working
     if request.method == "POST":
         form = StudentRequestTutorForm(request.POST)
         if form.is_valid():
             course = str(form.cleaned_data['course'])
             tutor = str(form.cleaned_data['tutor'])
-            return studentSubmitRequest(request, course, tutor)
-    return render(request, 'base/student_tutors_available.html', {'form': form, 'course': course, 'tutors': tutors})
+            return redirect('base:student-submit-request')
+    form = StudentRequestTutorForm(request.POST)
+    return render(request, 'base/student_tutors_available.html', {'form': form, 'course': course, 'tutors': request.session['tutors']})
 
 @allowed_users(allowed_roles=['student'])
-def studentSubmitRequest(request, course, tutor, student):
+def studentSubmitRequest(request):
 
     student = Student.objects.get(username=request.user.username)
     return render(request, 'base/student_submit_request.html')
