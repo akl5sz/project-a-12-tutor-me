@@ -1,9 +1,9 @@
 from django.contrib.auth.models import Group
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import login as logins, logout as logouts
 
 from .models import Student, Tutor, Course, CourseTutored
-from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm
+from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm
 
 from django.views.generic import ListView
 from django.db.models import Q
@@ -109,16 +109,20 @@ def studentCourseLookup(request):
 
 @allowed_users(allowed_roles=['student'])
 def studentTutorSearch(request, course, tutors):
-    # if request.method == "POST":
-    #     form = #todo
-    # return render(request, 'base/student_tutors_available.html', {'form': form, 'course': course, 'tutors': tutors})
+
+    #currently not working because the POST request is nested under the function above
     if request.method == "POST":
-        
-        return
-    return render(request, 'base/student_tutors_available.html', {'course': course, 'tutors': tutors})
+        form = StudentRequestTutorForm(request.POST)
+        if form.is_valid():
+            course = str(form.cleaned_data['course'])
+            tutor = str(form.cleaned_data['tutor'])
+            return studentSubmitRequest(request, course, tutor)
+    return render(request, 'base/student_tutors_available.html', {'form': form, 'course': course, 'tutors': tutors})
 
 @allowed_users(allowed_roles=['student'])
-def studentSubmitRequest(request):
+def studentSubmitRequest(request, course, tutor, student):
+
+    student = Student.objects.get(username=request.user.username)
     return render(request, 'base/student_submit_request.html')
 
 

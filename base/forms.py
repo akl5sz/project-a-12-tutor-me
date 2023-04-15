@@ -17,3 +17,7 @@ class TutorRemoveCourseForm(forms.Form):
     department = forms.CharField(max_length=8) #Example: 'APMA'
     number = forms.CharField(max_length=8) #Example: '3080'
     name = forms.CharField(max_length=200)
+
+class StudentRequestTutorForm(forms.Form):
+    course = forms.CharField(max_length=200)
+    tutor = forms.CharField(max_length=40)
