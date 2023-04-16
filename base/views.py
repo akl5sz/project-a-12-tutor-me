@@ -135,7 +135,8 @@ def studentSubmitRequest(request):
         form = StudentRequestTutorForm(request.POST)
         if form.is_valid():
             tutor = Tutor.objects.get(username=request.session['tutor'])
-            Notification(info=info, course=course, student=student,tutor=tutor).save()
+            if not Notification.objects.filter(info=info, course=course, student=student,tutor=tutor).exists():
+                Notification(info=info, course=course, student=student,tutor=tutor).save()
             return redirect('base:student-notification')
     form = StudentRequestTutorForm(request.POST)
     return render(request, 'base/student_submit_request.html', {'form': form, 'course': course, 'student': student, 'tutor': tutor})
@@ -144,6 +145,7 @@ def studentSubmitRequest(request):
 def studentNotification(request):
     student = Student.objects.get(username=request.user.username)
     notifications = Notification.objects.filter(student=student)
+    
     return render(request, 'base/student_notification.html', {'notifications': notifications})
 
 # -----------------------------------------------
