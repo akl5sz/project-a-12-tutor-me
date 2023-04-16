@@ -20,3 +20,8 @@ class TutorRemoveCourseForm(forms.Form):
 
 class StudentRequestTutorForm(forms.Form):
     tutor = forms.CharField(max_length=40)
+
+class TutorNotificationForm(forms.Form):
+    info = forms.CharField(max_length=1)
+    student = forms.CharField(max_length=40)
+    course = forms.CharField(max_length=80)

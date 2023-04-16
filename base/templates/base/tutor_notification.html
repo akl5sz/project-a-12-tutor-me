@@ -12,6 +12,30 @@
         <ol>
             {% if notification.info == "0" %} 
                 <p style="color:aliceblue;">{{notification.student}} has requested you as a tutor for {{notification.course}}</p>
+                
+                <div class="d-flex flex-row justify-content-center">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="info" value='1'>
+                        <input type="hidden" name="student" value='{{notification.student}}'>
+                        <input type="hidden" name="course" value='{{notification.course}}'>
+                        <button type="submit" class="btn btn-primary" >Accept</button>
+                    </form>
+
+                    <div style="width: 10px;"></div>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="info" value='2'>
+                        <input type="hidden" name="student" value='{{notification.student}}'>
+                        <input type="hidden" name="course" value='{{notification.course}}'>
+                        <button type="submit" class="btn btn-primary" >Reject</button>
+                    </form>
+                </div>
+                
+
+                
+
             {% elif notification.info == "1" %} 
                 <p style="color:aliceblue;">You have accepted {{notification.student}}'s request for {{notification.course}}</p>
             {% elif notification.info == "2" %} 

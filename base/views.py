@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as logins, logout as logouts
 
 from .models import Student, Tutor, Course, CourseTutored, Notification
-from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm
+from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm, TutorNotificationForm
 
 from django.views.generic import ListView
 from django.db.models import Q
@@ -217,10 +217,22 @@ def tutorViewRate(request):
 
     return render(request, 'base/tutor_view_rate.html', {'rate': t.hourly_rate})
 
-# -------------------------------------------------------------------------------
 
 @allowed_users(allowed_roles=['tutor'])
 def tutorNotification(request):
     tutor = Tutor.objects.get(username=request.user.username)
     notifications = Notification.objects.filter(tutor=tutor)
-    return render(request, 'base/tutor_notification.html', {'notifications': notifications})
+
+    if request.method == "POST":
+        form = TutorNotificationForm(request.POST)
+        if form.is_valid():
+            info = str(form.cleaned_data['info'])
+            student = Student.objects.get(username=str(form.cleaned_data['student']))
+            course = str(form.cleaned_data['course'])
+            if not Notification.objects.filter(info=info, course=course, student=student,tutor=tutor).exists():
+                Notification(info=info, course=course, student=student,tutor=tutor).save()
+            return redirect('base:tutor-notification')
+    form = TutorNotificationForm()
+    return render(request, 'base/tutor_notification.html', {'form': form, 'notifications': notifications})
+
+# -------------------------------------------------------------------------------
