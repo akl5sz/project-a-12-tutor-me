@@ -219,3 +219,8 @@ def tutorViewRate(request):
 
 # -------------------------------------------------------------------------------
 
+@allowed_users(allowed_roles=['tutor'])
+def tutorNotification(request):
+    tutor = Tutor.objects.get(username=request.user.username)
+    notifications = Notification.objects.filter(tutor=tutor)
+    return render(request, 'base/tutor_notification.html', {'notifications': notifications})
