@@ -145,7 +145,6 @@ def studentSubmitRequest(request):
 def studentNotification(request):
     student = Student.objects.get(username=request.user.username)
     notifications = Notification.objects.filter(student=student)
-    
     return render(request, 'base/student_notification.html', {'notifications': notifications})
 
 # -----------------------------------------------

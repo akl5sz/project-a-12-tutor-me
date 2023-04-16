@@ -10,8 +10,13 @@
     {% for notification in notifications %} 
     <div class="text-center mt-2 col-md-12">
         <ol>
-            <p style="color:aliceblue;">{{notification}}</p>
-            
+            {% if notification.info == "0" %} 
+                <p style="color:aliceblue;">You have requested {{notification.tutor}} as a tutor for {{notification.course}}</p>
+            {% elif notification.info == "1" %} 
+                <p style="color:aliceblue;">{{notification.tutor}} has accepted your tutoring request for {{notification.course}}</p>
+            {% elif notification.info == "2" %} 
+                <p style="color:aliceblue;">{{notification.tutor}} has rejected your tutoring request for {{notification.course}}</p>
+            {% endif %} 
         </ol>
     </div>
     {% endfor %}
