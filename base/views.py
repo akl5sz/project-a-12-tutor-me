@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as logins, logout as logouts
 
 from .models import Student, Tutor, Course, CourseTutored, Notification
-from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm, TutorNotificationForm
+from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm, TutorNotificationForm, StudentNotificationForm
 
 from django.views.generic import ListView
 from django.db.models import Q
@@ -145,7 +145,17 @@ def studentSubmitRequest(request):
 def studentNotification(request):
     student = Student.objects.get(username=request.user.username)
     notifications = Notification.objects.filter(student=student)
-    return render(request, 'base/student_notification.html', {'notifications': notifications})
+
+    if request.method == "POST":
+        form = StudentNotificationForm(request.POST)
+        if form.is_valid():
+            info = str(form.cleaned_data['info'])
+            tutor = Tutor.objects.get(username=str(form.cleaned_data['tutor']))
+            course = str(form.cleaned_data['course'])
+            Notification.objects.get(info=info, course=course, student=student,tutor=tutor).delete()
+            return redirect('base:student-notification')
+    form = StudentNotificationForm()
+    return render(request, 'base/student_notification.html', {'form': form, 'notifications': notifications})
 
 # -----------------------------------------------
 
