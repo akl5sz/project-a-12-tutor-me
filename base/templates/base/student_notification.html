@@ -2,3 +2,18 @@
 
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'base/styles.css' %}">
+
+<div class="d-flex flex-column align-items-center">
+    <div style="height: 10px;"></div>
+    
+    <h3 style="color:aliceblue;">Your Notifications:</h3>
+    {% for notification in notifications %} 
+    <div class="text-center mt-2 col-md-12">
+        <ol>
+            <p style="color:aliceblue;">{{notification}}</p>
+            
+        </ol>
+    </div>
+    {% endfor %}
+
+</div>

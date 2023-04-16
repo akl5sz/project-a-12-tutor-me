@@ -48,4 +48,4 @@ class Notification(models.Model):
     tutor = models.ForeignKey(Tutor, on_delete = models.CASCADE)
 
     def __str__(self):
-        return self.course + " " + self.student + " " + self.tutor
+        return self.course + " " + self.student.username + " " + self.tutor.username

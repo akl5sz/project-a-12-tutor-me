@@ -5,5 +5,10 @@
 
 <h1 style="color:aliceblue;">Submit a Request for Tutoring</h1>
 
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="tutor" value='{{ tutor }}'>
+    <button type="submit" class="btn btn-primary" >Request {{ tutor }} as a Tutor for {{ course }}</button>
+</form>
 
-<h1 style="color:aliceblue;">From {{ student }} To {{ tutor }} For {{ course }}</h1>
+

@@ -129,19 +129,22 @@ def studentTutorSearch(request):
 def studentSubmitRequest(request):
     course = Course.objects.get(department=request.session['department'], number=request.session['number'], name=request.session['name'])
     student = Student.objects.get(username=request.user.username)
-    tutor = request.session['tutor']
+    tutor = Tutor.objects.get(username=request.session['tutor'])
     info = "0"
     if request.method == "POST":
-        if not Notification.objects.filter(info=info, course=course, student=student,tutor=tutor).exists():  # Ensures that we don't add duplicate Course-Tutor relationship
-            Notification(info=info, course=course, student=student,tutor=tutor).save()  # adds course to tutor object and adds tutor to course object
+        form = StudentRequestTutorForm(request.POST)
+        if form.is_valid():
+            tutor = Tutor.objects.get(username=request.session['tutor'])
+            Notification(info=info, course=course, student=student,tutor=tutor).save()
             return redirect('base:student-notification')
-    return render(request, 'base/student_submit_request.html', {'course': course, 'student': student, 'tutor': tutor})
+    form = StudentRequestTutorForm(request.POST)
+    return render(request, 'base/student_submit_request.html', {'form': form, 'course': course, 'student': student, 'tutor': tutor})
 
 @allowed_users(allowed_roles=['student'])
 def studentNotification(request):
     student = Student.objects.get(username=request.user.username)
-    student.student_all_tutors.values()
-    return render(request, 'base/student_notification.html')
+    notifications = Notification.objects.filter(student=student)
+    return render(request, 'base/student_notification.html', {'notifications': notifications})
 
 # -----------------------------------------------
 
