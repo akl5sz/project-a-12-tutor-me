@@ -231,6 +231,7 @@ def tutorNotification(request):
             course = str(form.cleaned_data['course'])
             if not Notification.objects.filter(info=info, course=course, student=student,tutor=tutor).exists():
                 Notification(info=info, course=course, student=student,tutor=tutor).save()
+            Notification.objects.get(info="0", course=course, student=student,tutor=tutor).delete()
             return redirect('base:tutor-notification')
     form = TutorNotificationForm()
     return render(request, 'base/tutor_notification.html', {'form': form, 'notifications': notifications})
