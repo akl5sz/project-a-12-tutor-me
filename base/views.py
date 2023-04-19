@@ -4,7 +4,7 @@ from django.contrib.auth import login as logins, logout as logouts
 
 from .models import Student, Tutor, Course, CourseTutored, Notification, TimeFrame
 
-from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm, TutorNotificationForm, StudentNotificationForm, TutorPostTimeFrameForm
+from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm, TutorNotificationForm, StudentNotificationForm, TutorPostTimeFrameForm, StudentTimeFrameForm
 
 from django.views.generic import ListView
 from django.db.models import Q
@@ -124,6 +124,9 @@ def studentTutorSearch(request):
             request.session['tutor'] = tutor
             return redirect('base:student-submit-request')
     form = StudentRequestTutorForm(request.POST)
+
+    print((request.session['tutors']))
+
     return render(request, 'base/student_tutors_available.html', {'form': form, 'course': course, 'tutors': request.session['tutors']})
 
 @allowed_users(allowed_roles=['student'])
@@ -132,15 +135,33 @@ def studentSubmitRequest(request):
     student = Student.objects.get(username=request.user.username)
     tutor = Tutor.objects.get(username=request.session['tutor'])
     info = "0"
+    tutor_timeframes = TimeFrame.objects.filter(tutor = tutor)
+
     if request.method == "POST":
-        form = StudentRequestTutorForm(request.POST)
-        if form.is_valid():
-            tutor = Tutor.objects.get(username=request.session['tutor'])
-            if not Notification.objects.filter(info=info, course=course, student=student,tutor=tutor).exists():
-                Notification(info=info, course=course, student=student,tutor=tutor).save()
-            return redirect('base:student-notification')
-    form = StudentRequestTutorForm(request.POST)
-    return render(request, 'base/student_submit_request.html', {'form': form, 'course': course, 'student': student, 'tutor': tutor})
+        request_form = StudentRequestTutorForm(request.POST)
+        time_form = StudentTimeFrameForm(request.POST)
+
+        if time_form.is_valid():
+            print("time form valid")
+            student_chosen_time = (time_form.cleaned_data['tutoring_time'])
+            #User submits time
+        
+            #Need to go through all time frames to ensure this is a valid time
+            for timeframe in tutor_timeframes:
+                endTime = timeframe.end_time
+                startTime = timeframe.start_time
+
+                if student_chosen_time >= startTime and student_chosen_time <= endTime:
+                    if not Notification.objects.filter(info=info, course=course, student=student,tutor=tutor).exists():
+                        Notification(info=info, course=course, student=student,tutor=tutor).save()
+                        print(student_chosen_time)
+                        return redirect('base:student-notification')
+
+    request_form = StudentRequestTutorForm(request.POST)
+    time_form = StudentTimeFrameForm(request.POST)
+
+
+    return render(request, 'base/student_submit_request.html', {'form': request_form, 'time_form': time_form, 'course': course, 'student': student, 'tutor': tutor , 'tutor_timeframes': tutor_timeframes})
 
 @allowed_users(allowed_roles=['student'])
 def studentNotification(request):
@@ -293,6 +314,6 @@ def tutorPostTimeFrame(request):
     return render(request, 'base/tutor_post_timeframe.html', {'form': form})
 
 def tutorViewTimeFrames(request):
-    timeframes = TimeFrame.objects.values()
+    timeframes = TimeFrame.objects.filter(tutor = request.user.username)
     return render(request, 'base/tutor_view_timeframes.html', {'tutor_timeframes': timeframes})
 # -------------------------------------------------------------------------------

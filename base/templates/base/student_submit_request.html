@@ -17,12 +17,33 @@
         <button type="submit" class="btn btn-outline-light" >Requesting {{ tutor }} as a Tutor for {{ course }}</button>
     </form>
 
-    <div style="height: 10px;"></div>
 
+    <h3 style="color:aliceblue;">Available Time Frames of {{tutor}}</h3>
+    <div class="d-flex flex-column align-items-center">
+    <ul style"list-style-type: none;">
+    {% for timeframe in tutor_timeframes %}
+        <div class="text-center mt-2 col-md-12">
+          <ol>
+            <div class="d-flex flex-row justify-content-center">
+            <h4 style="color:aliceblue;"> {{timeframe.start_time}} to {{timeframe.end_time}}</h2>
+            </div>
+          </ol>
+        </div>
+    {% endfor %}
+    </ul>
+  </div>
     <form method="post">
+        <table style="color:aliceblue;">
+            {{ time_form.as_table }}
+        </table>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success" >Submit Request</button>
+    </form>
+  
+  <form method="post" value="Tutoring Time">
         {% csrf_token %}
         <input type="hidden" name="tutor" value='{{ tutor }}'>
-        <button type="submit" class="btn btn-success" >Submit</button>
+        <!-- <button type="submit" class="btn btn-success" >Submit Request</button> -->
     </form>
 
     <div class="d-flex flex-column align-items-center fixed-bottom">
@@ -33,5 +54,7 @@
     </div>
     
 </div>
+
+
 
 

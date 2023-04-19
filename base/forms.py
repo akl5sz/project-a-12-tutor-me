@@ -31,8 +31,8 @@ class StudentNotificationForm(forms.Form):
     tutor = forms.CharField(max_length=40)
     course = forms.CharField(max_length=80)
 
-class DateInput(forms.DateInput):
-    input_type = 'date'
+class StudentTimeFrameForm(forms.Form):
+    tutoring_time = forms.TimeField()
 
 class TutorPostTimeFrameForm(forms.Form):
     start_time = forms.TimeField()
