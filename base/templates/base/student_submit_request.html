@@ -31,7 +31,7 @@
         </div>
     {% endfor %}
     </ul>
-  </div>
+
     <form method="post">
         <table style="color:aliceblue;">
             {{ time_form.as_table }}
@@ -39,12 +39,19 @@
         {% csrf_token %}
         <button type="submit" class="btn btn-success" >Submit Request</button>
     </form>
+
+    <div class="text-center mt-2 col-md-12">
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="tutor" value='{{ tutor }}'>
+            <!-- <button type="submit" class="btn btn-success" >Submit Request</button> -->
+        </form>
+
+    </div>
+    </div>
+
+
   
-  <form method="post" value="Tutoring Time">
-        {% csrf_token %}
-        <input type="hidden" name="tutor" value='{{ tutor }}'>
-        <!-- <button type="submit" class="btn btn-success" >Submit Request</button> -->
-    </form>
 
     <div class="d-flex flex-column align-items-center fixed-bottom">
         <a href="student-request-tutor">

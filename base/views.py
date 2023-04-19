@@ -5,7 +5,6 @@ from django.contrib.auth import login as logins, logout as logouts
 from .models import Student, Tutor, Course, CourseTutored, Notification, TimeFrame
 
 from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm, TutorNotificationForm, StudentNotificationForm, TutorPostTimeFrameForm, StudentTimeFrameForm
-
 from django.views.generic import ListView
 from django.db.models import Q
 
@@ -268,6 +267,7 @@ def tutorNotification(request):
     form = TutorNotificationForm()
     return render(request, 'base/tutor_notification.html', {'form': form, 'notifications': notifications})
 
+@allowed_users(allowed_roles=['tutor'])
 def tutorPostTimeFrame(request):
     if request.method == 'POST':
         form = TutorPostTimeFrameForm(request.POST)
@@ -313,7 +313,10 @@ def tutorPostTimeFrame(request):
     form = TutorPostTimeFrameForm()
     return render(request, 'base/tutor_post_timeframe.html', {'form': form})
 
+@allowed_users(allowed_roles=['tutor'])
 def tutorViewTimeFrames(request):
-    timeframes = TimeFrame.objects.filter(tutor = request.user.username)
-    return render(request, 'base/tutor_view_timeframes.html', {'tutor_timeframes': timeframes})
+    tutor = Tutor.objects.get(username = request.user.username)
+    query = TimeFrame.objects.filter(tutor = tutor)
+
+    return render(request, 'base/tutor_view_timeframes.html', {'tutor_timeframes': query})
 # -------------------------------------------------------------------------------
