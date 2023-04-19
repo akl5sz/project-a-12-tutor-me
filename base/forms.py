@@ -33,8 +33,8 @@ class StudentNotificationForm(forms.Form):
 
 class DateInput(forms.DateInput):
     input_type = 'date'
-    
+
 class TimeFrameForm(forms.Form):
     date = forms.DateField(widget= DateInput)
-    start_time = forms.DateTimeField
-    end_time = forms.DateTimeField
+    start_time = forms.TimeField()
+    end_time = forms.TimeField()

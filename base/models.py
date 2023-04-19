@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.forms import DateInput
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 
@@ -49,3 +50,11 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.course + " " + self.student.username + " " + self.tutor.username
+    
+class TimeFrame(models.Model):
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+
+    def __str__(self):
+        return " " + str(self.start_time) + " to " + str(self.end_time) + " on " + str(self.date)
