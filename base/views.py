@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as logins, logout as logouts
 
 from .models import Student, Tutor, Course, CourseTutored, Notification
-from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm, TutorNotificationForm, StudentNotificationForm
+from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm, TutorNotificationForm, StudentNotificationForm, TimeFrameForm
 
 from django.views.generic import ListView
 from django.db.models import Q
@@ -246,4 +246,14 @@ def tutorNotification(request):
     form = TutorNotificationForm()
     return render(request, 'base/tutor_notification.html', {'form': form, 'notifications': notifications})
 
+def tutorAddTimeFrame(request):
+    if request.method == 'POST':
+        form = TimeFrameForm(request.POST)
+        if form.is_valid():
+            time_range = str(form.cleaned_data['date'])
+            # return render(request, {'time_range': time_range})
+            return render
+    else:
+        form = TimeFrameForm()
+    return render(request, 'base/tutor_add_timeframe.html', {'form': form})
 # -------------------------------------------------------------------------------
