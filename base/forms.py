@@ -32,7 +32,8 @@ class StudentNotificationForm(forms.Form):
     course = forms.CharField(max_length=80)
 
 class StudentTimeFrameForm(forms.Form):
-    tutoring_time = forms.TimeField()
+    start_time = forms.TimeField()
+    end_time = forms.TimeField()
 
 class TutorPostTimeFrameForm(forms.Form):
     start_time = forms.TimeField()
