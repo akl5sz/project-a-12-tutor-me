@@ -31,10 +31,13 @@ class StudentNotificationForm(forms.Form):
     tutor = forms.CharField(max_length=40)
     course = forms.CharField(max_length=80)
 
+class TimeInput(forms.TimeInput):
+    input_type = 'time'
+
 class StudentTimeFrameForm(forms.Form):
-    start_time = forms.TimeField()
-    end_time = forms.TimeField()
+    start_time = forms.TimeField(widget=TimeInput)
+    end_time = forms.TimeField(widget=TimeInput)
 
 class TutorPostTimeFrameForm(forms.Form):
-    start_time = forms.TimeField()
-    end_time = forms.TimeField()
+    start_time = forms.TimeField(widget=TimeInput)
+    end_time = forms.TimeField(widget=TimeInput)

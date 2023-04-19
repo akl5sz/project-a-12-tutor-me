@@ -150,7 +150,7 @@ def studentSubmitRequest(request):
             for timeframe in tutor_timeframes:
                 this_endTime = timeframe.end_time
                 this_startTime = timeframe.start_time
-                if student_chosen_start_time >= this_startTime and student_chosen_end_time <= this_endTime:
+                if student_chosen_start_time >= this_startTime and student_chosen_end_time <= this_endTime and student_chosen_start_time < student_chosen_end_time:
                     if not Notification.objects.filter(info=info, course=course, student=student,tutor=tutor).exists():
                         Notification(info=info, course=course, student=student,tutor=tutor).save()
                         return redirect('base:student-notification')
