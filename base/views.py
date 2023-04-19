@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as logins, logout as logouts
 
 from .models import Student, Tutor, Course, CourseTutored, Notification, TimeFrame
-from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm, TutorNotificationForm, StudentNotificationForm, TimeFrameForm
+
+from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm, TutorNotificationForm, StudentNotificationForm, TutorPostTimeFrameForm, TutorRemoveTimeFrameForm
 
 from django.views.generic import ListView
 from django.db.models import Q
@@ -248,19 +249,24 @@ def tutorNotification(request):
 
 def tutorPostTimeFrame(request):
     if request.method == 'POST':
-        form = TimeFrameForm(request.POST)
+        form = TutorPostTimeFrameForm(request.POST)
         if form.is_valid():
             date = str(form.cleaned_data['date'])
             start_time = str(form.cleaned_data['start_time'])
             end_time = str(form.cleaned_data['end_time'])
-            time_frame = TimeFrame(date = date, start_time = start_time, end_time = end_time)
+            #find the tutor who owns this posted time frame
+            t = Tutor.objects.get(username = request.user.username)
+            print("tutor", t)
             if start_time < end_time:
+                print("here")
+                time_frame = TimeFrame(date = date, start_time = start_time, end_time = end_time, tutor = t)
                 time_frame.save()
+                print(time_frame)
                 return tutorViewTimeFrames(request)
-    form = TimeFrameForm()
+    form = TutorPostTimeFrameForm()
     return render(request, 'base/tutor_post_timeframe.html', {'form': form})
 
 def tutorViewTimeFrames(request):
     timeframes = TimeFrame.objects.values()
-    return render(request, 'base/tutor_view_timeframes.html', {'timeframes': timeframes})
+    return render(request, 'base/tutor_view_timeframes.html', {'tutor_timeframes': timeframes})
 # -------------------------------------------------------------------------------

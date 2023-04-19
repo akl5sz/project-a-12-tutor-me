@@ -18,7 +18,6 @@ class Student(models.Model):
 class Tutor(models.Model):
     username = models.CharField(max_length = 80)
     hourly_rate = models.CharField(max_length = 40)
-    time_frames = models.CharField(max_length = 40)
     #Represents the list of courses for a particular tutor (courses the tutor has posted)
     tutor_all_courses = models.ManyToManyField('Course', through = 'CourseTutored')
     tutor_all_students = models.ManyToManyField('Student', through = 'Notification')
@@ -40,6 +39,8 @@ class Course(models.Model):
 class CourseTutored(models.Model):
     tutor = models.ForeignKey(Tutor, on_delete = models.CASCADE)
     course = models.ForeignKey(Course, on_delete = models.CASCADE)
+    def __str__(self):
+        return str(self.course) + " tutored by " + str(self.tutor.username)
 
 
 class Notification(models.Model):
@@ -55,6 +56,7 @@ class TimeFrame(models.Model):
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
+    tutor = models.ForeignKey(Tutor, on_delete = models.CASCADE)
 
     def __str__(self):
-        return " " + str(self.start_time) + " to " + str(self.end_time) + " on " + str(self.date)
+        return self.tutor.username + ":  " + str(self.start_time) + " to " + str(self.end_time) + " on " + str(self.date)

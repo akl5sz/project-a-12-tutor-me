@@ -11,18 +11,18 @@
 <div style="height: 30px;"></div>
 
 
-<!-- LIST OF COURSES -->
+LIST OF COURSES
 <div class="d-flex flex-column align-items-center">
     <ul style"list-style-type: none;">
-      {% for timeframe in timeframes %}
+    {% for timeframe in tutor_timeframes %}
         <div class="text-center mt-2 col-md-12">
           <ol>
             <div class="d-flex flex-row justify-content-center">
-
             <h2 style="color:aliceblue;"> {{timeframe.start_time}} to {{timeframe.end_time}} on {{timeframe.date}} </h2>
             </div>
           </ol>
         </div>
-      {% endfor %}
+    {% endfor %}
     </ul>
   </div>
+
