@@ -35,11 +35,5 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 class TutorPostTimeFrameForm(forms.Form):
-    date = forms.DateField(widget= DateInput)
-    start_time = forms.TimeField()
-    end_time = forms.TimeField()
-
-class TutorRemoveTimeFrameForm(forms.Form):
-    date = forms.DateField(widget= DateInput)
     start_time = forms.TimeField()
     end_time = forms.TimeField()
