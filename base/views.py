@@ -306,7 +306,8 @@ def tutorPostTimeFrame(request):
                         return tutorViewTimeFrames(request)
                     
                 #Make an entirely separate time frame
-                time_frame = TimeFrame(start_time = new_start, end_time = new_end, tutor = t)
+                day = (form.cleaned_data['start_time'])
+                time_frame = TimeFrame(day_of_week = day, start_time = new_start, end_time = new_end, tutor = t)
                 time_frame.save()
                 return tutorViewTimeFrames(request)
     form = TutorPostTimeFrameForm()

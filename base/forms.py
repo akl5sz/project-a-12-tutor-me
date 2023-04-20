@@ -38,7 +38,17 @@ class StudentTimeFrameForm(forms.Form):
     start_time = forms.TimeField(widget=TimeInput)
     end_time = forms.TimeField(widget=TimeInput)
 
+DAY_CHOICES= [
+    ('Monday', 'Monday'),
+    ('Tuesday', 'Tuesday'),
+    ('Wednesday', 'Wednesday'),
+    ('Thursday', 'Thursday'),
+    ('Friday', 'Friday'),
+    ('Saturday', 'Saturday'),
+    ('Sunday', 'Sunday'),
+]
+
 class TutorPostTimeFrameForm(forms.Form):
-    day_of_week = forms.DateField(widget=forms.DateField)
+    day_of_week = forms.CharField(widget=forms.Select(choices=DAY_CHOICES))
     start_time = forms.TimeField(widget=TimeInput)
     end_time = forms.TimeField(widget=TimeInput)
