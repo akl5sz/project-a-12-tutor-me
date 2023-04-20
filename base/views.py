@@ -318,4 +318,6 @@ def tutorViewTimeFrames(request):
     query = TimeFrame.objects.filter(tutor = tutor)
 
     return render(request, 'base/tutor_view_timeframes.html', {'tutor_timeframes': query})
+
+
 # -------------------------------------------------------------------------------

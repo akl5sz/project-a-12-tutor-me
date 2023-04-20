@@ -53,9 +53,10 @@ class Notification(models.Model):
         return self.course + " " + self.student.username + " " + self.tutor.username
     
 class TimeFrame(models.Model):
+    day_of_week = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
     tutor = models.ForeignKey(Tutor, on_delete = models.CASCADE)
 
     def __str__(self):
-        return self.tutor.username + ":  " + str(self.start_time) + " to " + str(self.end_time)
+        return self.tutor.username + ":  " + str(self.day_of_week) + " "  + str(self.start_time) + " to " + str(self.end_time)

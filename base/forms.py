@@ -39,5 +39,6 @@ class StudentTimeFrameForm(forms.Form):
     end_time = forms.TimeField(widget=TimeInput)
 
 class TutorPostTimeFrameForm(forms.Form):
+    day_of_week = forms.DateField(widget=forms.DateField)
     start_time = forms.TimeField(widget=TimeInput)
     end_time = forms.TimeField(widget=TimeInput)
