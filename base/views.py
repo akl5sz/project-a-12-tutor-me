@@ -271,6 +271,7 @@ def tutorPostTimeFrame(request):
     if request.method == 'POST':
         form = TutorPostTimeFrameForm(request.POST)
         if form.is_valid():
+            day = (form.cleaned_data['day_of_week'])
             new_start = (form.cleaned_data['start_time'])
             new_end = (form.cleaned_data['end_time'])
             #find the tutor who owns this posted time frame
@@ -280,33 +281,33 @@ def tutorPostTimeFrame(request):
                 #Look for overlapping time frame
                 all_timeframes = TimeFrame.objects.filter(tutor = t) #all the time frames for this tutor
                 for timeframe in all_timeframes:
-                    old_start = timeframe.start_time
-                    old_end = timeframe.end_time
-                    
-                    #i.e: Old: 12PM to 4PM. New input: 1PM to 5PM. Result: update time frame to 12PM to 5PM
-                    if new_start >= old_start and new_start <= old_end and new_end >= old_end:
-                        timeframe.delete()
-                        time_frame = TimeFrame(start_time = old_start, end_time = new_end, tutor = t).save()
-                        return tutorViewTimeFrames(request)
+                    if (timeframe.day_of_week == day):
+                        old_start = timeframe.start_time
+                        old_end = timeframe.end_time
 
-                    #i.e: Old: 4AM to 8AM. New input: 3AM to 7AM. Result: update time frame to 3AM to 8AM
-                    if new_start <= old_start and new_end <= old_end and new_start <= old_end:
-                        timeframe.delete()
-                        time_frame = TimeFrame(start_time = new_start, end_time = old_end, tutor = t).save()
-                        return tutorViewTimeFrames(request)
-                    
-                    #i.e: Old: 5AM to 9AM. New input: 3AM to 10AM. Result: 3 AM to 10AM
-                    if new_start <= old_start and new_end >= old_end and new_start <= old_end :
-                        timeframe.delete()
-                        time_frame = TimeFrame(start_time = new_start, end_time = new_end, tutor = t).save()
-                        return tutorViewTimeFrames(request)
-                    
-                    #i.e: Old: 4AM to 9AM. New input: 5AM to 6AM. Result: 4AM to 9AM
-                    if new_start >= old_start and new_end <= old_end:
-                        return tutorViewTimeFrames(request)
+                        #i.e: Old: 12PM to 4PM. New input: 1PM to 5PM. Result: update time frame to 12PM to 5PM
+                        if new_start >= old_start and new_start <= old_end and new_end >= old_end:
+                            timeframe.delete()
+                            time_frame = TimeFrame(day_of_week = day, start_time = old_start, end_time = new_end, tutor = t).save()
+                            return tutorViewTimeFrames(request)
+
+                        #i.e: Old: 4AM to 8AM. New input: 3AM to 7AM. Result: update time frame to 3AM to 8AM
+                        if new_start <= old_start and new_end <= old_end and new_start <= old_end:
+                            timeframe.delete()
+                            time_frame = TimeFrame(day_of_week = day, start_time = new_start, end_time = old_end, tutor = t).save()
+                            return tutorViewTimeFrames(request)
+
+                        #i.e: Old: 5AM to 9AM. New input: 3AM to 10AM. Result: 3 AM to 10AM
+                        if new_start <= old_start and new_end >= old_end and new_start <= old_end :
+                            timeframe.delete()
+                            time_frame = TimeFrame(day_of_week = day, start_time = new_start, end_time = new_end, tutor = t).save()
+                            return tutorViewTimeFrames(request)
+
+                        #i.e: Old: 4AM to 9AM. New input: 5AM to 6AM. Result: 4AM to 9AM
+                        if new_start >= old_start and new_end <= old_end:
+                            return tutorViewTimeFrames(request)
                     
                 #Make an entirely separate time frame
-                day = (form.cleaned_data['start_time'])
                 time_frame = TimeFrame(day_of_week = day, start_time = new_start, end_time = new_end, tutor = t)
                 time_frame.save()
                 return tutorViewTimeFrames(request)
