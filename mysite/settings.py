@@ -64,7 +64,7 @@ MIDDLEWARE = [
 # other security checks from GP-I
 # CSRF_COOKIE_SECURE = True  # make it hard for network traffic sniffers to steal CSRF token
 # SESSION_COOKIE_SECURE = True  # make it hard for network traffic sniffers to hijack user sessions
-# SECURE_SSL_REDIRECT = True  # make site available on only SSL
+SECURE_SSL_REDIRECT = False  # make site available on only SSL
 # SECURE_HSTS_SECONDS = 63072000  # never load site using HTTP and convert to HTTPS, remembers to load site
 # # using HTTPS for 2 years
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # make not vulnerable to attack via insecure connection to subdomain
