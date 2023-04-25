@@ -1,0 +1,128 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'accounts/auth.css' %}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block head_title %}{% endblock %}</title>
+    {% block extra_head %}
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+
+    {% if messages %}
+        <div>
+            <strong>{% trans "Messages:" %}</strong>
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <div>
+        <strong>{% trans "Welcome, how do you wish to proceed?" %}</strong>
+        <ul>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'account_email' %}">{% trans "Change E-mail" %}</a></li>
+                <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
+            {% else %}
+                <li><a href="{% url 'account_login' %}">{% trans "Login to Existing Account" %}</a></li>
+                <li><a href="{% url 'account_signup' %}">{% trans "Create New Account" %}</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    {% block content %}
+    {% endblock %}
+{% endblock %}
+{% block extra_body %}
+{% endblock %}
+</body>
+</html>
+
+<style>
+    * {
+        margin: 0;
+        padding: 5px;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        color: #CAD5CA;
+        background: #2a2a3b;
+    }
+
+    main {
+        max-width: 768px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 1rem;
+        color: #CAD5CA;
+    }
+
+
+    input {
+        background: transparent;
+        align-items: center;
+        width: 500px;
+        height: 25px;
+        margin: 0 auto;
+        outline: 0;
+        border-width: 0 0 1px;
+        border-color: #8075FF;
+    }
+
+    input, select, textarea {
+        color: #edf0f1;
+    }
+
+    input::placeholder {
+        color: #746B76;
+    }
+
+    input:focus {
+        border-color: #d2d4d5;
+    }
+
+    button {
+        background: #333;
+        color: #d2d4d5;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 40px;
+        font-size: 1rem;
+        cursor: pointer;
+        height: 40px;
+        font-weight: 600;
+    }
+
+    button:hover {
+        color: #8075FF;
+        box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+    }
+
+    strong {
+        transform: translateX(100%);
+        padding: 1rem;
+    }
+
+    li {
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        list-style: none;
+        padding: 1rem;
+        border: 1px solid #8075FF;
+        border-radius: 4px;
+        background-color: #8075FF;
+        margin: 1rem 0;
+    }
+
+    li a {
+        color: #6320EE;
+    }
+</style>
