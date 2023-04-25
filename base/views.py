@@ -4,7 +4,9 @@ from django.contrib.auth import login as logins, logout as logouts
 
 from .models import Student, Tutor, Course, CourseTutored, Notification, TimeFrame
 
-from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm, TutorNotificationForm, StudentNotificationForm, TutorPostTimeFrameForm, StudentTimeFrameForm
+from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, \
+    StudentRequestTutorForm, TutorNotificationForm, StudentNotificationForm, TutorPostTimeFrameForm, \
+    StudentTimeFrameForm, TutorRemoveTimeframeForm
 from django.views.generic import ListView
 from django.db.models import Q
 
@@ -318,8 +320,19 @@ def tutorPostTimeFrame(request):
 def tutorViewTimeFrames(request):
     tutor = Tutor.objects.get(username = request.user.username)
     query = TimeFrame.objects.filter(tutor = tutor)
-
-    return render(request, 'base/tutor_view_timeframes.html', {'tutor_timeframes': query})
+    if request.method == "POST":
+        form = TutorRemoveTimeframeForm(request.POST)
+        if form.is_valid():
+            t = Tutor.objects.get(username=request.user.username)  # find the right tutor model
+            day_of_week = str(form.cleaned_data['day_of_week'])
+            start_time = str(form.cleaned_data['start_time'])
+            end_time = str(form.cleaned_data['end_time'])
+            timeframe = TimeFrame.objects.filter(day_of_week=day_of_week, start_time=start_time, end_time=end_time,tutor=t)
+            if timeframe.exists():  # Ensures that an incorrect course is not posted
+                timeframe.delete()
+                return redirect('base:tutor-view-timeframes')
+    form = TutorRemoveTimeframeForm()
+    return render(request, 'base/tutor_view_timeframes.html', {'form': form, 'tutor_timeframes': query})
 
 
 # -------------------------------------------------------------------------------

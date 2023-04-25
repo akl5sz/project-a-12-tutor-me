@@ -52,3 +52,8 @@ class TutorPostTimeFrameForm(forms.Form):
     day_of_week = forms.CharField(widget=forms.Select(choices=DAY_CHOICES))
     start_time = forms.TimeField(widget=TimeInput)
     end_time = forms.TimeField(widget=TimeInput)
+
+class TutorRemoveTimeframeForm(forms.Form):
+    day_of_week = forms.CharField(widget=forms.Select(choices=DAY_CHOICES))
+    start_time = forms.TimeField(widget=TimeInput)
+    end_time = forms.TimeField(widget=TimeInput)
