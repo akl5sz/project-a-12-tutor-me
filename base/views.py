@@ -236,7 +236,13 @@ def tutorPostRate(request):
         form = TutorPostRateForm(request.POST)
         if form.is_valid():
             t = Tutor.objects.get(username=request.user.username)  # find the right tutor model
-            hr = str(form.cleaned_data['rate'])
+            hr = form.cleaned_data['rate']
+            try:
+                hr = float(hr)
+            except:
+                return render(request, 'base/tutor_post_rate.html', {'form': form})
+            if (hr < 0):
+                return render(request, 'base/tutor_post_rate.html', {'form': form})
             t.hourly_rate = hr
             t.save()
             print(hr)
