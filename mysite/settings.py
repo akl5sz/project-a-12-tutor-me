@@ -22,8 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-m7!_eqq0(un#_okraqp-&_v18cksn!-4$u9$00ierv_c)fp2va'
-# SECRET_KEY = 'q+r-evg*%5&jh_@zk(7f(ox(64s5azn(%2hx=@b6w^eeng@-!8'  # generate new secret key to prevent vulnerability
-# of Django's security-critical features
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -60,15 +58,6 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
-
-# other security checks from GP-I
-# CSRF_COOKIE_SECURE = True  # make it hard for network traffic sniffers to steal CSRF token
-# SESSION_COOKIE_SECURE = True  # make it hard for network traffic sniffers to hijack user sessions
-SECURE_SSL_REDIRECT = False  # make site available on only SSL
-# SECURE_HSTS_SECONDS = 63072000  # never load site using HTTP and convert to HTTPS, remembers to load site
-# # using HTTPS for 2 years
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # make not vulnerable to attack via insecure connection to subdomain
-# SECURE_HSTS_PRELOAD = True  # be able to have site submitted to browser preload list
 
 ROOT_URLCONF = 'mysite.urls'
 
@@ -182,7 +171,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-STATICFILES_DIRS = [BASE_DIR / "oauth_app/assets"]
 
 try:
     if 'HEROKU' in os.environ:
