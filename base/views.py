@@ -144,15 +144,17 @@ def studentSubmitRequest(request):
 
         if time_form.is_valid():
             print("time form valid")
+            student_chosen_day = (time_form.cleaned_data['day_of_week'])
             student_chosen_start_time = (time_form.cleaned_data['start_time'])
             student_chosen_end_time = (time_form.cleaned_data['end_time'])
             #User submits time
         
             #Need to go through all time frames to ensure this is a valid time
             for timeframe in tutor_timeframes:
+                this_day = timeframe.day_of_week
                 this_endTime = timeframe.end_time
                 this_startTime = timeframe.start_time
-                if student_chosen_start_time >= this_startTime and student_chosen_end_time <= this_endTime and student_chosen_start_time < student_chosen_end_time:
+                if student_chosen_day == this_day and student_chosen_start_time >= this_startTime and student_chosen_end_time <= this_endTime and student_chosen_start_time < student_chosen_end_time:
                     if not Notification.objects.filter(info=info, course=course, student=student,tutor=tutor).exists():
                         Notification(info=info, course=course, student=student,tutor=tutor).save()
                         return redirect('base:student-notification')
