@@ -45,12 +45,12 @@
 <!-- PAGE TITLE -->
 <div style="height: 50px;"></div>
 <div class="d-flex flex-column align-items-center">
-  <h1 style="color:aliceblue;">Your Posted Time Frames</h1>
+    <h1 style="color:aliceblue;">Your Posted Time Frames</h1>
 </div>
 <div style="height: 30px;"></div>
 
 <div class="d-flex flex-column align-items-center">
-{#    <h1 class="h1">Your Posted Time Frames</h1>#}
+    {#    <h1 class="h1">Your Posted Time Frames</h1>#}
     {% for timeframe in tutor_timeframes %}
         <form method="post">
             <table class="table" style="color:#CAD5CA;">
@@ -63,12 +63,13 @@
             </table>
             {% csrf_token %}
         </form>
-        <a class="nav-link" href="/tutor-post-timeframe">
-            <button class="btn btn-outline-info" type="button">Edit</button>
-        </a>
         </div>
     {% endfor %}
-
+<div class="d-flex flex-column align-items-center">
+    <a class="nav-link" href="/tutor-post-timeframe">
+        <button class="btn btn-outline-info" type="button">Edit</button>
+    </a>
+</div>
 </div>
 
 <style>
