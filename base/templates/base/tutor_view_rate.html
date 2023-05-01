@@ -3,10 +3,12 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'base/styles.css' %}">
 
-<div class="d-flex flex-column align-items-center">
-    <h1 style="color:aliceblue;">Your Hourly Rate:</h1>
+<div class="d-flex flex-column align-items-center" style="margin-top: 150px">
+    <h1 style="color:aliceblue;">Your Hourly Rate</h1>
 
     <h2 style="color:aliceblue;">${{rate}}</h2>
 
-
+    <a class="nav-link" href="/tutor-post-rate">
+        <button class="btn btn-outline-info" type="button">Edit</button>
+    </a>
 </div>
