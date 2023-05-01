@@ -1,3 +1,37 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+
+@kaylangu
+uva-cs3240-s23
+/
+project-a-12
+Private
+Cannot fork because forking is disabled.
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+Beta Try the new code view
+project-a-12/base/templates/base/tutor_view_courses.html
+@akl5sz
+akl5sz combined view courses and search courses tabs into one
+Latest commit 51568ed 16 hours ago
+History
+4 contributors
+@SIeepii@kaylangu@akl5sz@arjuntrivedi
+60 lines (52 sloc)  2.04 KB
+
+
 {% block nav %}{% include 'base/tutor_navbar.html' %}{% endblock nav %}
 
 {% load static %}
@@ -12,14 +46,6 @@
 
 <!-- LIST OF COURSES -->
 <div class="d-flex flex-column align-items-center">
-    <ul style = "list-style-type: none;">
-      {% for course in tutor_courses %}
-        <div class="text-center mt-2 col-md-12">
-          <ol>
-            <div class="d-flex flex-row justify-content-center">
-                <form>
-                    <button class="btn btn-outline-light" >{{course.department}} {{course.number}} {{course.name}}</button>
-                </form>
     <ul style="list-style-type: none">
         {% for course in tutor_courses %}
             {#        <div class="text-center mt-2 col-md-12">#}
