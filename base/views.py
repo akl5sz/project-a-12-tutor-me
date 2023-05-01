@@ -2,15 +2,13 @@ from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as logins, logout as logouts
 
-from .models import Student, Tutor, Course, CourseTutored, Notification
-from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm, TutorNotificationForm
+from .models import Student, Tutor, Course, CourseTutored, Notification, TimeFrame
 
+from .forms import TutorPostCourseForm, TutorLookupForm, TutorPostRateForm, TutorRemoveCourseForm, StudentRequestTutorForm, TutorNotificationForm, StudentNotificationForm, TutorPostTimeFrameForm, StudentTimeFrameForm
 from django.views.generic import ListView
 from django.db.models import Q
 
 from .decorators import allowed_users
-
-#from . import script
 
 
 def index(request):
@@ -125,6 +123,9 @@ def studentTutorSearch(request):
             request.session['tutor'] = tutor
             return redirect('base:student-submit-request')
     form = StudentRequestTutorForm(request.POST)
+
+    print((request.session['tutors']))
+
     return render(request, 'base/student_tutors_available.html', {'form': form, 'course': course, 'tutors': request.session['tutors']})
 
 @allowed_users(allowed_roles=['student'])
@@ -133,21 +134,48 @@ def studentSubmitRequest(request):
     student = Student.objects.get(username=request.user.username)
     tutor = Tutor.objects.get(username=request.session['tutor'])
     info = "0"
+    tutor_timeframes = TimeFrame.objects.filter(tutor = tutor)
+
     if request.method == "POST":
-        form = StudentRequestTutorForm(request.POST)
-        if form.is_valid():
-            tutor = Tutor.objects.get(username=request.session['tutor'])
-            if not Notification.objects.filter(info=info, course=course, student=student,tutor=tutor).exists():
-                Notification(info=info, course=course, student=student,tutor=tutor).save()
-            return redirect('base:student-notification')
-    form = StudentRequestTutorForm(request.POST)
-    return render(request, 'base/student_submit_request.html', {'form': form, 'course': course, 'student': student, 'tutor': tutor})
+        request_form = StudentRequestTutorForm(request.POST)
+        time_form = StudentTimeFrameForm(request.POST)
+
+        if time_form.is_valid():
+            print("time form valid")
+            student_chosen_start_time = (time_form.cleaned_data['start_time'])
+            student_chosen_end_time = (time_form.cleaned_data['end_time'])
+            #User submits time
+        
+            #Need to go through all time frames to ensure this is a valid time
+            for timeframe in tutor_timeframes:
+                this_endTime = timeframe.end_time
+                this_startTime = timeframe.start_time
+                if student_chosen_start_time >= this_startTime and student_chosen_end_time <= this_endTime and student_chosen_start_time < student_chosen_end_time:
+                    if not Notification.objects.filter(info=info, course=course, student=student,tutor=tutor).exists():
+                        Notification(info=info, course=course, student=student,tutor=tutor).save()
+                        return redirect('base:student-notification')
+
+    request_form = StudentRequestTutorForm(request.POST)
+    time_form = StudentTimeFrameForm(request.POST)
+
+
+    return render(request, 'base/student_submit_request.html', {'form': request_form, 'time_form': time_form, 'course': course, 'student': student, 'tutor': tutor , 'tutor_timeframes': tutor_timeframes})
 
 @allowed_users(allowed_roles=['student'])
 def studentNotification(request):
     student = Student.objects.get(username=request.user.username)
     notifications = Notification.objects.filter(student=student)
-    return render(request, 'base/student_notification.html', {'notifications': notifications})
+
+    if request.method == "POST":
+        form = StudentNotificationForm(request.POST)
+        if form.is_valid():
+            info = str(form.cleaned_data['info'])
+            tutor = Tutor.objects.get(username=str(form.cleaned_data['tutor']))
+            course = str(form.cleaned_data['course'])
+            Notification.objects.get(info=info, course=course, student=student,tutor=tutor).delete()
+            return redirect('base:student-notification')
+    form = StudentNotificationForm()
+    return render(request, 'base/student_notification.html', {'form': form, 'notifications': notifications})
 
 # -----------------------------------------------
 
@@ -238,4 +266,56 @@ def tutorNotification(request):
     form = TutorNotificationForm()
     return render(request, 'base/tutor_notification.html', {'form': form, 'notifications': notifications})
 
+@allowed_users(allowed_roles=['tutor'])
+def tutorPostTimeFrame(request):
+    if request.method == 'POST':
+        form = TutorPostTimeFrameForm(request.POST)
+        if form.is_valid():
+            new_start = (form.cleaned_data['start_time'])
+            new_end = (form.cleaned_data['end_time'])
+            #find the tutor who owns this posted time frame
+            t = Tutor.objects.get(username = request.user.username)
+            print("tutor", t)
+            if new_start < new_end:
+                #Look for overlapping time frame
+                all_timeframes = TimeFrame.objects.filter(tutor = t) #all the time frames for this tutor
+                for timeframe in all_timeframes:
+                    old_start = timeframe.start_time
+                    old_end = timeframe.end_time
+                    
+                    #i.e: Old: 12PM to 4PM. New input: 1PM to 5PM. Result: update time frame to 12PM to 5PM
+                    if new_start >= old_start and new_start <= old_end and new_end >= old_end:
+                        timeframe.delete()
+                        time_frame = TimeFrame(start_time = old_start, end_time = new_end, tutor = t).save()
+                        return tutorViewTimeFrames(request)
+
+                    #i.e: Old: 4AM to 8AM. New input: 3AM to 7AM. Result: update time frame to 3AM to 8AM
+                    if new_start <= old_start and new_end <= old_end and new_start <= old_end:
+                        timeframe.delete()
+                        time_frame = TimeFrame(start_time = new_start, end_time = old_end, tutor = t).save()
+                        return tutorViewTimeFrames(request)
+                    
+                    #i.e: Old: 5AM to 9AM. New input: 3AM to 10AM. Result: 3 AM to 10AM
+                    if new_start <= old_start and new_end >= old_end and new_start <= old_end :
+                        timeframe.delete()
+                        time_frame = TimeFrame(start_time = new_start, end_time = new_end, tutor = t).save()
+                        return tutorViewTimeFrames(request)
+                    
+                    #i.e: Old: 4AM to 9AM. New input: 5AM to 6AM. Result: 4AM to 9AM
+                    if new_start >= old_start and new_end <= old_end:
+                        return tutorViewTimeFrames(request)
+                    
+                #Make an entirely separate time frame
+                time_frame = TimeFrame(start_time = new_start, end_time = new_end, tutor = t)
+                time_frame.save()
+                return tutorViewTimeFrames(request)
+    form = TutorPostTimeFrameForm()
+    return render(request, 'base/tutor_post_timeframe.html', {'form': form})
+
+@allowed_users(allowed_roles=['tutor'])
+def tutorViewTimeFrames(request):
+    tutor = Tutor.objects.get(username = request.user.username)
+    query = TimeFrame.objects.filter(tutor = tutor)
+
+    return render(request, 'base/tutor_view_timeframes.html', {'tutor_timeframes': query})
 # -------------------------------------------------------------------------------

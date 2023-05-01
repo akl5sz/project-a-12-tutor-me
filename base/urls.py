@@ -20,5 +20,8 @@ urlpatterns = [
     path('tutor-view-rate', views.tutorViewRate, name='view-rate'),
     path('tutor-view-courses', views.tutorViewCourses, name='tutor-view-courses'),
     path('tutor-notification', views.tutorNotification, name='tutor-notification'),
+    path('tutor-post-timeframe', views.tutorPostTimeFrame, name='tutor-post-timeframe'),
+    path('tutor-view-timeframes', views.tutorViewTimeFrames, name='tutor-view-timeframes'),
+
 
 ]
