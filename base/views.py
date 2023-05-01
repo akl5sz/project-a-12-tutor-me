@@ -10,6 +10,8 @@ from django.db.models import Q
 
 from .decorators import allowed_users
 
+#from . import script
+
 
 def index(request):
     return render(request, 'base/index.html')
