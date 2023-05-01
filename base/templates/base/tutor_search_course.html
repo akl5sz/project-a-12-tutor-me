@@ -36,9 +36,14 @@
 <!-- LIST OF COURSES -->
 <div class="d-flex flex-column align-items-center">
   <div style="height: 10px;"></div>
-  <ul style"list-style-type: none;">
-    {% for course in object_list %}
+  <ul style = "list-style-type: none;">
 
+    {% for course in object_list %}
+        {% if object_list.length == 0 %}
+            <div class="d-flex flex-row justify-content-center">
+            <div style="width: 10px;">Please enter a valid department, course number, or course name (Ex. "CS", "3240", "Advanced Software Development").</div>
+            <\div>
+        {% endif %}
       <div class="text-center mt-2 col-md-12">
         <ol>
           <div class="d-flex flex-row justify-content-center">

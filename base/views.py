@@ -106,7 +106,6 @@ def studentCourseLookup(request):
             name = str(form.cleaned_data['name'])
             if Course.objects.filter(department=department, number=number, name=name).exists():  # Ensures that an incorrect course is not posted
                 c = Course.objects.get(department=department, number=number, name=name)
-
                 request.session['department'] = department
                 request.session['number'] = number
                 request.session['name'] = name
