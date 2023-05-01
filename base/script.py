@@ -12,13 +12,13 @@ def url(flagList):
     r = requests.get(url)
     classList = []
     for c in r.json():
-        courseMnemonic = c['subject']
-        courseNumber = c['catalog_nbr']
-        courseTitle = c['descr']
-        courseName = courseMnemonic + " " + courseNumber + ": " + courseTitle
+        department = c['subject']
+        number = c['catalog_nbr']
+        name = c['descr']
+        courseName = department + " " + number + ": " + name
         if courseName not in classList:
 
-            c = Course(mnem = courseMnemonic, num = courseNumber, descr = courseTitle)
+            c = Course(department = department, number = number, name = name)
             c.save()
             classList.append(courseName)
     return classList
@@ -26,6 +26,7 @@ def url(flagList):
 def main():
 
     for i in range(90):
+        print("saving page", i)
         flagList = [("term", 1228), ("page", str(i))]
         list = url(flagList)
-main()
+#main()

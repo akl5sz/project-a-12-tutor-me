@@ -20,12 +20,12 @@
 
     <h3 style="color:aliceblue;">Available Time Frames of {{tutor}}</h3>
     <div class="d-flex flex-column align-items-center">
-    <ul style = "list-style-type: none;">
+    <ul style"list-style-type: none;">
     {% for timeframe in tutor_timeframes %}
         <div class="text-center mt-2 col-md-12">
           <ol>
             <div class="d-flex flex-row justify-content-center">
-            <h2 style="color:aliceblue;"> {{timeframe.day_of_week}} {{timeframe.start_time}} to {{timeframe.end_time}}</h2>
+            <h4 style="color:aliceblue;"> {{timeframe.start_time}} to {{timeframe.end_time}}</h2>
             </div>
           </ol>
         </div>
@@ -36,34 +36,28 @@
         <table style="color:aliceblue;">
             {{ time_form.as_table }}
         </table>
-        <div class="d-flex flex-column align-items-center">
         {% csrf_token %}
-        <button type="submit" class="btn btn-success"  >Submit Request</button>
-        </div>
+        <button type="submit" class="btn btn-success" >Submit Request</button>
     </form>
 
-{#    <div class="text-center mt-2 col-md-12">#}
-{#        <form method="post">#}
-{#            {% csrf_token %}#}
-{#            <input type="hidden" name="tutor" value='{{ tutor }}'>#}
-{#            <!-- <button type="submit" class="btn btn-success" >Submit Request</button> -->#}
-{#        </form>#}
-{##}
-{#    </div>#}
-{#    </div>#}
+    <div class="text-center mt-2 col-md-12">
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="tutor" value='{{ tutor }}'>
+            <!-- <button type="submit" class="btn btn-success" >Submit Request</button> -->
+        </form>
 
-
-<footer class="fixed-bottom">
-    <div class="d-flex justify-content-end ml-auto p-4">
-        <a href="student-request-tutor">
-            <button class="btn btn-outline-warning" >back to tutor list</button>
-        </a>
-        <div style="height: 20px;"></div>
     </div>
-</footer>
+    </div>
 
+
+  
+
+    <div class="d-flex flex-column align-items-center fixed-bottom">
+        <a href="student-request-tutor">
+            <button class="btn btn-outline-warning"  >back to tutor list</button>
+        </a>
+        <div style="height: 30px;"></div>
+    </div>
+    
 </div>
-
-
-
-

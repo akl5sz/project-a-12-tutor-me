@@ -34,27 +34,10 @@ class StudentNotificationForm(forms.Form):
 class TimeInput(forms.TimeInput):
     input_type = 'time'
 
-DAY_CHOICES= [
-    ('Monday', 'Monday'),
-    ('Tuesday', 'Tuesday'),
-    ('Wednesday', 'Wednesday'),
-    ('Thursday', 'Thursday'),
-    ('Friday', 'Friday'),
-    ('Saturday', 'Saturday'),
-    ('Sunday', 'Sunday'),
-]
-
 class StudentTimeFrameForm(forms.Form):
-    day_of_week = forms.CharField(widget=forms.Select(choices=DAY_CHOICES))
     start_time = forms.TimeField(widget=TimeInput)
     end_time = forms.TimeField(widget=TimeInput)
 
 class TutorPostTimeFrameForm(forms.Form):
-    day_of_week = forms.CharField(widget=forms.Select(choices=DAY_CHOICES))
-    start_time = forms.TimeField(widget=TimeInput)
-    end_time = forms.TimeField(widget=TimeInput)
-
-class TutorRemoveTimeframeForm(forms.Form):
-    day_of_week = forms.CharField(widget=forms.Select(choices=DAY_CHOICES))
     start_time = forms.TimeField(widget=TimeInput)
     end_time = forms.TimeField(widget=TimeInput)
