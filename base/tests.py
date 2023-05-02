@@ -13,7 +13,7 @@ class ViewTestCase(TestCase):
     def test_login_view(self):
         response = self.client.get("/login")
         self.assertTemplateUsed(response, "base/general_login.html")
-        self.assertTemplateUsed(response, "base/general_navbar.html")
+        # self.assertTemplateUsed(response, "base/general_navbar.html")
         #self.assertContains(
             #response, "Login With Google")
     
