@@ -13,13 +13,13 @@
 
 <!-- LIST OF COURSES -->
 <div class="d-flex flex-column align-items-center">
-    <ul style"list-style-type: none;">
+    <ul style="list-style-type: none;">
       {% for tutor in tutors %}
         <div class="text-center mt-2 col-md-12">
           <ol>
             <div class="d-flex flex-row justify-content-center">
                 <form>
-                    <button class="btn btn-outline-light" >{{tutor.username}} (${{tutor.hourly_rate}}/hr)</button>
+                    {{tutor.username}} (${{tutor.hourly_rate}}/hr)
                 </form>
 
                 <div style="width: 10px;"></div>
@@ -36,3 +36,18 @@
       {% endfor %}
     </ul>
   </div>
+
+<style>
+    * {
+        color: white;
+    }
+
+    form {
+        text-align: center;
+    }
+
+    h1 {
+        font-family: "Open Sans", sans-serif;
+        color: white;
+    }
+</style>
